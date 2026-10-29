@@ -35,7 +35,7 @@ At build time, Next.js renders each route and sorts every part of the tree into 
 - **Cached**: async work marked with `'use cache'`. It is prerendered too, as long as its lifetime isn't too short.
 - **Request-time**: uncached fetches, `cookies()`, `headers()`, `searchParams`, unknown `params`. These **must** sit inside `<Suspense>`. Their fallback goes into the prerendered page and the real content streams in per request.
 
-Static and cached parts form the **static shell**, which a CDN can serve instantly. This is **Partial Prerendering (PPR)**: one page, partly static, partly streamed.
+Static and cached parts form the **static shell**, which a [CDN](/web-platform/cdn/) can serve instantly. This is **Partial Prerendering (PPR)**: one page, partly static, partly [streamed](/architecture/rendering/#streaming).
 
 The **previous model** (Next.js 13–15, still used when the flag is off) cached a lot implicitly: `fetch` results and whole routes, controlled by route segment options like `dynamic` and `revalidate`. It was hard to predict. The new model is explicit.
 

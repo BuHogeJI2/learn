@@ -16,7 +16,7 @@ officialDocs:
 
 ## What problem it solves
 
-A request travels a long way: browser → network → CDN (a network of servers placed close to users that keep copies of your content) → application server → database, and back. Every step costs time, and the steps at the end (rendering, queries) also cost money and capacity.
+A request travels a long way: browser → network → [CDN](/web-platform/cdn/) (a network of servers placed close to users that keep copies of your content) → application server → database, and back. Every step costs time, and the steps at the end (rendering, queries) also cost money and capacity.
 
 A cache keeps a copy of a result **closer to where it is needed**, so repeated work is skipped. It gives you two things:
 
@@ -64,7 +64,7 @@ The closer a layer is to the user, the faster it is and the harder it is to inva
 
 ## HTTP caching: the shared language
 
-Layers 2 and 4 are controlled by HTTP headers, and most frameworks translate their own settings into these headers. So it is worth knowing the main ones.
+Layers 2 and 4 are controlled by [HTTP headers](/web-platform/http/#headers-metadata-that-drives-behavior), and most frameworks translate their own settings into these headers. So it is worth knowing the main ones.
 
 **`Cache-Control` directives:**
 

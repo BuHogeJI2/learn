@@ -100,7 +100,7 @@ A user sees data that is 20 minutes old, but your server cache TTL is only 5 min
 
 The layers stack: browser, CDN and server caches each have their own lifetime, so the worst-case age can be their sum.
 
-To find the source, look at the response headers in the Network tab:
+To find the source, look at the response headers in the [Network tab](/web-platform/page-loading/#reading-the-network-tab):
 
 - `Age`: how long the copy has been in a shared cache.
 - The CDN status header (`x-vercel-cache`, `cf-cache-status`, `x-cache`): `HIT` means the CDN answered.

@@ -145,7 +145,26 @@ notice, so links never break.
 | static shell, Partial Prerendering | same | English |
 | Server Components, Server Actions, Route Handlers, Draft Mode | same | English |
 | read-your-own-writes | read-your-own-writes | English |
-| Observability, Delivery (domain names) | same | English |
+| Observability, Delivery (domain names) | Мониторинг, Поставка ПО | Russian; translate every domain name that is not a tool name |
+| status code | статус-код | Russian |
+| safe, idempotent (method) | безопасный, идемпотентный | Russian |
+| endpoint | эндпоинт | Russian |
+| contract, schema | контракт, схема | Russian |
+| hydration, streaming | гидратация, стриминг | Russian |
+| source of truth | источник истины | Russian |
+| optimistic update | оптимистичное обновление | Russian |
+| main thread | главный поток (main thread) | Russian |
+| round trip, RTT, TTFB | same | English |
+| handshake | handshake | English |
+| waterfall, preload scanner, layout shift | same | English |
+| islands, resumability | same | English |
+| over-fetching, under-fetching | same | English |
+| breaking change | breaking change | English |
+| idempotency key | idempotency key | English |
+| race condition | race condition | English |
+| reverse proxy, PoP, anycast | same | English |
+| origin shield, request collapsing | same | English |
+| DDoS, WAF, rate limiting | same | English |
 
 ## Development
 

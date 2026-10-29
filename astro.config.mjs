@@ -34,8 +34,8 @@ export default defineConfig({
 				domain('Security', 'Безопасность', 'security'),
 				domain('Architecture', 'Архитектура', 'architecture'),
 				domain('Data', 'Данные', 'data'),
-				domain('Observability', 'Observability', 'observability'),
-				domain('Delivery', 'Delivery', 'delivery'),
+				domain('Observability', 'Мониторинг', 'observability'),
+				domain('Delivery', 'Поставка ПО', 'delivery'),
 				{
 					label: 'Tools',
 					translations: { ru: 'Инструменты' },
