@@ -1,0 +1,32 @@
+---
+import { getDomainTopics } from '../lib/topics';
+
+const { entry } = Astro.locals.starlightRoute;
+const topics = await getDomainTopics(entry.id);
+const planned = entry.data.planned ?? [];
+---
+
+{
+	topics.length > 0 && (
+		<ul class="domain-topics">
+			{topics.map((topic) => (
+				<li>
+					<a href={topic.href}>{topic.title}</a>
+					{topic.description && <span> — {topic.description}</span>}
+				</li>
+			))}
+		</ul>
+	)
+}
+{
+	planned.length > 0 && (
+		<>
+			<p class="domain-planned-title">Not written yet</p>
+			<ul class="domain-planned">
+				{planned.map((title) => (
+					<li>{title}</li>
+				))}
+			</ul>
+		</>
+	)
+}

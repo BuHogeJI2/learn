@@ -1,0 +1,37 @@
+---
+import Default from '@astrojs/starlight/components/PageTitle.astro';
+import { getTopicConnections } from '../lib/topics';
+
+const { entry } = Astro.locals.starlightRoute;
+const { concept, quizTopic } = await getTopicConnections(entry);
+const { verified } = entry.data;
+---
+
+{
+	concept && (
+		<p class="topic-parent">
+			Part of <a href={concept.href}>{concept.title}</a>
+		</p>
+	)
+}
+{
+	quizTopic && (
+		<p class="topic-parent">
+			Quiz for <a href={quizTopic.href}>{quizTopic.title}</a>
+		</p>
+	)
+}
+<Default />
+{
+	verified && (
+		<p class="topic-verified">
+			Checked against{' '}
+			{Object.entries(verified.versions).map(([tool, version]) => (
+				<code>
+					{tool} {version}
+				</code>
+			))}{' '}
+			on {verified.date.toISOString().slice(0, 10)}
+		</p>
+	)
+}

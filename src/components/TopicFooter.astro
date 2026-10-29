@@ -1,0 +1,64 @@
+---
+import { LinkButton } from '@astrojs/starlight/components';
+import { getTopicConnections, type TopicLink } from '../lib/topics';
+
+const { entry } = Astro.locals.starlightRoute;
+const { concept, related, linkedFrom, quiz } = await getTopicConnections(entry);
+const officialDocs = entry.data.officialDocs ?? [];
+const relatedTopics: TopicLink[] = concept ? [concept, ...related] : related;
+---
+
+{
+	quiz && (
+		<div class="topic-quiz">
+			<p>Want to check how well you understand this topic?</p>
+			<LinkButton href={quiz.href} icon="right-arrow">
+				Check yourself
+			</LinkButton>
+		</div>
+	)
+}
+{
+	officialDocs.length > 0 && (
+		<section class="topic-links">
+			<h2>Official docs</h2>
+			<ul>
+				{officialDocs.map((doc) => (
+					<li>
+						<a href={doc.url} target="_blank" rel="noopener">
+							{doc.title}
+						</a>
+					</li>
+				))}
+			</ul>
+		</section>
+	)
+}
+{
+	relatedTopics.length > 0 && (
+		<section class="topic-links">
+			<h2>Related topics</h2>
+			<ul>
+				{relatedTopics.map((topic) => (
+					<li>
+						<a href={topic.href}>{topic.title}</a>
+					</li>
+				))}
+			</ul>
+		</section>
+	)
+}
+{
+	linkedFrom.length > 0 && (
+		<section class="topic-links">
+			<h2>Linked from</h2>
+			<ul>
+				{linkedFrom.map((topic) => (
+					<li>
+						<a href={topic.href}>{topic.title}</a>
+					</li>
+				))}
+			</ul>
+		</section>
+	)
+}

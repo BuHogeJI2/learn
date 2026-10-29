@@ -1,0 +1,28 @@
+---
+title: Learn Book
+description: A personal book about how the web and software systems work, focused on "what" and "why".
+---
+
+import { CardGrid, LinkCard } from '@astrojs/starlight/components';
+
+This book is about high-level knowledge: what options exist, how things work inside, and why to choose one approach over another. It is not about syntax. An agent can write the code; deciding what to build and why is still your job.
+
+## How the book is organized
+
+- **Concept pages** explain a problem and the possible solutions, independent of any tool.
+- **Tool pages** are short. They link up to their concept and show the tool version they were checked against.
+- **Quizzes** are separate. When a topic has one, you will see a "Check yourself" button at the end of the page.
+
+Every page ends with links to the official docs and to related topics.
+
+## Domains
+
+<CardGrid>
+	<LinkCard title="Web platform" href="/web-platform/" description="HTTP, the browser, sitemap, robots.txt, manifest, CDN." />
+	<LinkCard title="Security" href="/security/" description="Authentication, CORS, XSS, CSRF, CSP." />
+	<LinkCard title="Architecture" href="/architecture/" description="Caching, rendering strategies, API and architecture styles, system design." />
+	<LinkCard title="Data" href="/data/" description="Database types, CMS." />
+	<LinkCard title="Observability" href="/observability/" description="Logs, metrics, traces, OpenTelemetry, Web Vitals, Sentry, Grafana." />
+	<LinkCard title="Delivery" href="/delivery/" description="CI/CD, containers, Kubernetes." />
+	<LinkCard title="Tools" href="/tools/" description="React, Next.js, Apollo: how specific tools implement the concepts." />
+</CardGrid>
