@@ -2,18 +2,18 @@
 import { LinkButton } from '@astrojs/starlight/components';
 import { getTopicConnections, type TopicLink } from '../lib/topics';
 
-const { entry } = Astro.locals.starlightRoute;
-const { concept, related, linkedFrom, quiz } = await getTopicConnections(entry);
-const officialDocs = entry.data.officialDocs ?? [];
+const { entry, locale } = Astro.locals.starlightRoute;
+const { concept, related, linkedFrom, quiz, officialDocs } = await getTopicConnections(entry, locale);
 const relatedTopics: TopicLink[] = concept ? [concept, ...related] : related;
+const { t } = Astro.locals;
 ---
 
 {
 	quiz && (
 		<div class="topic-quiz">
-			<p>Want to check how well you understand this topic?</p>
+			<p>{t('topic.quizPrompt')}</p>
 			<LinkButton href={quiz.href} icon="right-arrow">
-				Check yourself
+				{t('topic.quizButton')}
 			</LinkButton>
 		</div>
 	)
@@ -21,7 +21,7 @@ const relatedTopics: TopicLink[] = concept ? [concept, ...related] : related;
 {
 	officialDocs.length > 0 && (
 		<section class="topic-links">
-			<h2>Official docs</h2>
+			<h2>{t('topic.officialDocs')}</h2>
 			<ul>
 				{officialDocs.map((doc) => (
 					<li>
@@ -37,7 +37,7 @@ const relatedTopics: TopicLink[] = concept ? [concept, ...related] : related;
 {
 	relatedTopics.length > 0 && (
 		<section class="topic-links">
-			<h2>Related topics</h2>
+			<h2>{t('topic.related')}</h2>
 			<ul>
 				{relatedTopics.map((topic) => (
 					<li>
@@ -51,7 +51,7 @@ const relatedTopics: TopicLink[] = concept ? [concept, ...related] : related;
 {
 	linkedFrom.length > 0 && (
 		<section class="topic-links">
-			<h2>Linked from</h2>
+			<h2>{t('topic.linkedFrom')}</h2>
 			<ul>
 				{linkedFrom.map((topic) => (
 					<li>

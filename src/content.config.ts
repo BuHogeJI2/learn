@@ -1,7 +1,7 @@
 import { defineCollection } from 'astro:content';
 import { z } from 'astro/zod';
-import { docsLoader } from '@astrojs/starlight/loaders';
-import { docsSchema } from '@astrojs/starlight/schema';
+import { docsLoader, i18nLoader } from '@astrojs/starlight/loaders';
+import { docsSchema, i18nSchema } from '@astrojs/starlight/schema';
 
 const topicSchema = z.object({
 	concept: z.string().optional(),
@@ -17,6 +17,19 @@ const topicSchema = z.object({
 	quizFor: z.string().optional(),
 });
 
+const uiStrings = z.object({
+	'topic.partOf': z.string(),
+	'topic.quizFor': z.string(),
+	'topic.checkedAgainst': z.string(),
+	'topic.quizPrompt': z.string(),
+	'topic.quizButton': z.string(),
+	'topic.officialDocs': z.string(),
+	'topic.related': z.string(),
+	'topic.linkedFrom': z.string(),
+	'topic.notWrittenYet': z.string(),
+});
+
 export const collections = {
 	docs: defineCollection({ loader: docsLoader(), schema: docsSchema({ extend: topicSchema }) }),
+	i18n: defineCollection({ loader: i18nLoader(), schema: i18nSchema({ extend: uiStrings }) }),
 };

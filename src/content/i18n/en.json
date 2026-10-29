@@ -1,0 +1,11 @@
+{
+	"topic.partOf": "Part of",
+	"topic.quizFor": "Quiz for",
+	"topic.checkedAgainst": "Checked against",
+	"topic.quizPrompt": "Want to check how well you understand this topic?",
+	"topic.quizButton": "Check yourself",
+	"topic.officialDocs": "Official docs",
+	"topic.related": "Related topics",
+	"topic.linkedFrom": "Linked from",
+	"topic.notWrittenYet": "Not written yet"
+}

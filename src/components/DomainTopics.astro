@@ -1,9 +1,9 @@
 ---
 import { getDomainTopics } from '../lib/topics';
 
-const { entry } = Astro.locals.starlightRoute;
-const topics = await getDomainTopics(entry.id);
-const planned = entry.data.planned ?? [];
+const { entry, locale } = Astro.locals.starlightRoute;
+const topics = await getDomainTopics(entry, locale);
+const { planned } = entry.data;
 ---
 
 {
@@ -21,7 +21,7 @@ const planned = entry.data.planned ?? [];
 {
 	planned.length > 0 && (
 		<>
-			<p class="domain-planned-title">Not written yet</p>
+			<p class="domain-planned-title">{Astro.locals.t('topic.notWrittenYet')}</p>
 			<ul class="domain-planned">
 				{planned.map((title) => (
 					<li>{title}</li>

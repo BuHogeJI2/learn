@@ -1,0 +1,11 @@
+{
+	"topic.partOf": "Часть темы",
+	"topic.quizFor": "Вопросы к теме",
+	"topic.checkedAgainst": "Проверено на",
+	"topic.quizPrompt": "Хотите проверить, насколько хорошо поняли тему?",
+	"topic.quizButton": "Проверить себя",
+	"topic.officialDocs": "Официальная документация",
+	"topic.related": "Связанные темы",
+	"topic.linkedFrom": "Ссылаются на эту тему",
+	"topic.notWrittenYet": "Ещё не написано"
+}

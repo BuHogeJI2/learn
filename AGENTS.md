@@ -76,6 +76,63 @@ ASCII diagrams where they make the model clearer.
 The reader's first language is not English. Use common words and short
 sentences, without simplifying the content.
 
+## Russian version
+
+English is the source. Russian pages live in `src/content/docs/ru/` and mirror
+the English paths. A page without a translation shows the English text with a
+notice, so links never break.
+
+- A Russian file has text frontmatter only: `title`, `description`, `planned`,
+  `sidebar`. Structure (`concept`, `related`, `officialDocs`, `verified`,
+  `quizFor`) stays in the English file; the build fails if a translation sets it.
+- Every change to an English page updates its Russian page in the same change.
+- UI strings of the custom components live in `src/content/i18n/{en,ru}.json`.
+  Sidebar group labels are translated in `astro.config.mjs`.
+
+### How to translate
+
+- Translate faithfully: same sections, same claims, same strength of each
+  recommendation, same uncertainty. Add nothing, drop nothing, don't rewrite
+  as an explanation.
+- Code, commands, identifiers, HTTP headers, file names, API names and error
+  text stay exactly as they are.
+- Use "вы" for the reader.
+- Follow the glossary. A term marked "English" stays in English; the first
+  time it appears on a page, add its Russian meaning in brackets:
+  "hit rate (доля попаданий в кэш)". Later uses on the page need no brackets.
+- A term not in the glossary: keep it in English if Russian developers usually
+  say it in English, otherwise use the common Russian word. Add the decision
+  to the glossary.
+
+### Glossary
+
+| English | Russian | Rule |
+| --- | --- | --- |
+| cache, caching | кэш, кэширование | Russian |
+| cache key | ключ кэша | Russian |
+| invalidation | инвалидация | Russian |
+| request, response | запрос, ответ | Russian |
+| header | заголовок | Russian |
+| server, browser, database | сервер, браузер, база данных | Russian |
+| layer | слой | Russian |
+| build, deploy | сборка, деплой | Russian |
+| framework | фреймворк | Russian |
+| freshness | свежесть | Russian |
+| scope | scope (кто видит данные) | English |
+| CDN, edge, origin | CDN, edge, origin | English |
+| TTL, hit rate | TTL, hit rate | English |
+| stale-while-revalidate | stale-while-revalidate | English |
+| purge | purge | English |
+| cache stampede, thundering herd | cache stampede, thundering herd | English |
+| cache-aside, write-through, write-behind | same | English |
+| request coalescing, jitter | same | English |
+| serverless | serverless | English |
+| fallback | fallback | English |
+| static shell, Partial Prerendering | same | English |
+| Server Components, Server Actions, Route Handlers, Draft Mode | same | English |
+| read-your-own-writes | read-your-own-writes | English |
+| Observability, Delivery (domain names) | same | English |
+
 ## Development
 
 ```

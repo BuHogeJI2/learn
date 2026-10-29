@@ -1,0 +1,28 @@
+---
+title: Learn Book
+description: Личная книга о том, как устроены веб и программные системы, с фокусом на «что» и «зачем».
+---
+
+import { CardGrid, LinkCard } from '@astrojs/starlight/components';
+
+Эта книга о знаниях высокого уровня: какие есть варианты, как всё устроено внутри и почему стоит выбрать один подход, а не другой. Она не про синтаксис. Код может написать агент; решать, что строить и зачем, по-прежнему вам.
+
+## Как устроена книга
+
+- **Страницы концепций** объясняют проблему и возможные решения без привязки к инструменту.
+- **Страницы инструментов** короткие. Они ссылаются на свою концепцию и показывают версию инструмента, на которой проверены.
+- **Вопросы для самопроверки** вынесены отдельно. Если у темы они есть, в конце страницы будет кнопка «Проверить себя».
+
+Каждая страница заканчивается ссылками на официальную документацию и на связанные темы.
+
+## Разделы
+
+<CardGrid>
+	<LinkCard title="Веб-платформа" href="/ru/web-platform/" description="HTTP, браузер, sitemap, robots.txt, manifest, CDN." />
+	<LinkCard title="Безопасность" href="/ru/security/" description="Аутентификация, CORS, XSS, CSRF, CSP." />
+	<LinkCard title="Архитектура" href="/ru/architecture/" description="Кэширование, стратегии рендеринга, стили API и архитектуры, system design." />
+	<LinkCard title="Данные" href="/ru/data/" description="Типы баз данных, CMS." />
+	<LinkCard title="Observability" href="/ru/observability/" description="Логи, метрики, трейсы, OpenTelemetry, Web Vitals, Sentry, Grafana." />
+	<LinkCard title="Delivery" href="/ru/delivery/" description="CI/CD, контейнеры, Kubernetes." />
+	<LinkCard title="Инструменты" href="/ru/tools/" description="React, Next.js, Apollo: как конкретные инструменты реализуют концепции." />
+</CardGrid>
