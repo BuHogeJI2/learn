@@ -70,7 +70,7 @@ The trade-off: the edge is close to the **user** but usually far from the **data
 The edge is good for work that needs **no origin data, or only data that is replicated to the edge**:
 
 - redirects and rewrites;
-- a first check of a self-contained signed token, such as a JWT (JSON Web Token): its signature, expiry and required claims need no database. Whether the session was revoked, or what the user may do right now, still needs current data;
+- a first check of a self-contained signed token, such as a [JWT](/security/auth/#mental-model-a-credential-checked-on-every-request) (JSON Web Token): its signature, expiry and required claims need no database. Whether the session was revoked, or what the user may do right now, still needs current data;
 - assigning A/B test groups and geo-based variants;
 - adding or changing headers;
 - serving responses from an edge key-value store.

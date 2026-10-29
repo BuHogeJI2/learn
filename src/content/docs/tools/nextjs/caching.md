@@ -53,7 +53,7 @@ Built-in `cacheLife` profiles: `seconds`, `minutes`, `hours`, `days`, `weeks`, `
 **`revalidateTag` vs `updateTag`:**
 
 - `revalidateTag(tag, 'max')` is **[stale-while-revalidate](/architecture/caching/#freshness-strategies)**: the next visitor still gets the old data while the new data is generated. Use it for catalogs and blog posts. It works in Server Actions (server functions called from forms and client code) and Route Handlers (API endpoints inside the `app` directory).
-- `updateTag(tag)` **expires the entry immediately**, so the user who made the change sees it right away ("read your own writes"). It works only in Server Actions.
+- `updateTag(tag)` **expires the entry immediately**, so the user who made the change sees it right away ([read-your-own-writes](/data/consistency/#copies-and-consistency-models)). It works only in Server Actions.
 
 ## Where cached results live
 

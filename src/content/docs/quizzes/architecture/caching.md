@@ -54,7 +54,7 @@ Prevention:
 
 - Mark personalized responses `Cache-Control: private` or `no-store`.
 - Separate public data (cacheable) from personal data (separate requests).
-- Configure the CDN to bypass the cache when a session cookie or `Authorization` header is present, and don't let it ignore `private`.
+- Configure the CDN to bypass the cache when a [session cookie](/security/auth/#sessions-in-practice-the-lifecycle) or `Authorization` header is present, and don't let it ignore `private`.
 
 It is a **scope** mistake: the data was correct but went to the wrong audience. Treat it as a security incident, not only a bug.
 

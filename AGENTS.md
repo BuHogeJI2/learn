@@ -165,6 +165,38 @@ notice, so links never break.
 | reverse proxy, PoP, anycast | same | English |
 | origin shield, request collapsing | same | English |
 | DDoS, WAF, rate limiting | same | English |
+| site (as in same-site) | сайт | Russian |
+| same-origin policy, CORS, preflight | same | English |
+| credentials | учётные данные | Russian |
+| XSS, CSRF, CSP, clickjacking, nonce, sink | same | English |
+| supply chain, Trusted Types, SRI | same | English |
+| escaping, sanitizer | экранирование, санитайзер (санитизация) | Russian |
+| authentication, authorization | аутентификация, авторизация | Russian |
+| session, token | сессия, токен | Russian |
+| access token, refresh token, ID token, JWT, claims | same | English |
+| OAuth, OIDC, PKCE, SSO, MFA, passkey | same | English |
+| identity provider, IDOR, session fixation, credential stuffing | same | English |
+| RBAC, ABAC, ReBAC, tenant, multi-tenant | same | English |
+| relational, document, graph, vector, columnar (database) | реляционная, документная, графовая, векторная, колоночная | Russian |
+| key-value, wide-column, time-series, OLTP, OLAP | same | English |
+| index, inverted index | индекс, инвертированный индекс | Russian |
+| join, B-tree, ORM, schemaless | same | English |
+| normalization, denormalization | нормализация, денормализация | Russian |
+| replica, sharding, partitioning | реплика, шардинг, партиционирование | Russian |
+| object storage | объектное хранилище | Russian |
+| consistency, transaction, isolation level | согласованность, транзакция, уровень изоляции | Russian |
+| ACID, write skew, deadlock, clock skew | same | English |
+| lost update, non-repeatable read | потерянное обновление, неповторяющееся чтение | Russian |
+| Read committed, Repeatable read, Serializable | same | English |
+| optimistic, pessimistic locking | оптимистичная, пессимистичная блокировка | Russian |
+| strong consistency, monotonic reads | строгая согласованность, монотонное чтение | Russian |
+| eventual consistency, CAP | same | English |
+| saga, compensating action | сага, компенсирующее действие | Russian |
+| dual write, transactional outbox, CDC | same | English |
+| monolith, modular monolith, microservices | монолит, модульный монолит, микросервисы | Russian |
+| micro-frontends | микрофронтенды | Russian |
+| API gateway, bounded context, service mesh, big ball of mud | same | English |
+| Conway's law | закон Конвея | Russian |
 
 ## Development
 

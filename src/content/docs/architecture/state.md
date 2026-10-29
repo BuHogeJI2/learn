@@ -84,12 +84,12 @@ Optimistic updates fit actions that **almost always succeed** and are **cheap to
 
 ### Concurrent changes
 
-Two tabs or two users change the same record. The simplest rule is **last write wins**, and it silently loses data. Alternatives:
+Two tabs or two users change the same record. The simplest rule is **last write wins**, and it silently loses data. The database side is in [Data consistency](/data/consistency/#concurrent-writes-and-isolation). Alternatives:
 
 - **Version checks**: send the version you started from (an `ETag` with `If-Match`); the server refuses with `412` if someone changed it in between.
 - **Merging**, up to collaborative data types (CRDTs, conflict-free replicated data types) that merge edits automatically, as in collaborative editors.
 
-The user who made a change must see it right away, even if other users see it a bit later. This guarantee is called **read-your-own-writes**.
+The user who made a change must see it right away, even if other users see it a bit later. This guarantee is called **[read-your-own-writes](/data/consistency/#copies-and-consistency-models)**.
 
 ## Server state with server rendering
 
@@ -105,7 +105,7 @@ With **Server Components**, data used only by server components **never becomes 
 - **Missing loading, error and empty states.** The happy path works; everything else shows a blank area or wrong data.
 - **Race conditions.** While typing in a search box, an older, slower response arrives after a newer one and overwrites it. Cancel old requests (`AbortController`) or ignore outdated responses; server-state libraries do this by key.
 - **Everything global.** Every piece of state in one store makes unrelated components re-render together and couples features.
-- **Sensitive data in `localStorage`.** Any script on the page can read it.
+- **Sensitive data in `localStorage`.** Any script on the page can read it, including one injected through [XSS](/security/web-attacks/#xss-data-that-becomes-code).
 
 ## How to choose
 

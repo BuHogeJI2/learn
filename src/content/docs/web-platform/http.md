@@ -68,7 +68,7 @@ A method tells everyone on the path (browser, proxies, [CDN](/web-platform/cdn/)
 | `PUT` | Replace a resource completely | No | Yes | No |
 | `PATCH` | Change part of a resource | No | Not guaranteed | No |
 | `DELETE` | Delete a resource | No | Yes | No |
-| `OPTIONS` | Ask what is allowed; used for CORS preflight (the browser asks the server before a cross-site request that could change data) | Yes | Yes | No |
+| `OPTIONS` | Ask what is allowed; used for [CORS](/security/browser-boundaries/#cors-the-server-opts-in-to-being-read) preflight (the browser asks the server for permission before a cross-origin request with a non-basic method, header or content type) | Yes | Yes | No |
 
 These are promises, not enforcement: nothing stops a server from deleting data on `GET`. But the rest of the web believes the promise. Browsers prefetch links, crawlers follow them, and proxies retry idempotent requests on their own. A "delete" action behind a `GET` link will be triggered by someone who only looked.
 
@@ -97,7 +97,7 @@ Headers are where most of the web's features live. The main groups:
 - **Content negotiation**: `Accept` (what the client wants), `Content-Type` (what the body is), `Accept-Encoding` / `Content-Encoding` (compression such as `gzip`, `br`, `zstd`).
 - **Caching**: `Cache-Control`, `ETag`, `Vary`. See [Caching](/architecture/caching/#http-caching-the-shared-language).
 - **Identity and state**: `Cookie` / `Set-Cookie`, `Authorization` (a token sent by the client code).
-- **Security policies**: `Strict-Transport-Security` (always use HTTPS), `Content-Security-Policy` (which scripts may run), CORS headers `Access-Control-*` (which other sites may read the response).
+- **Security policies**: `Strict-Transport-Security` (always use HTTPS), [`Content-Security-Policy`](/security/web-attacks/#csp-limiting-what-can-run) (which scripts may run), CORS headers `Access-Control-*` (which other sites may read the response).
 - **Proxy information**: `Host` (which site on a shared server), `Forwarded` / `X-Forwarded-For` (the original client IP when a proxy sits in between).
 
 ## Cookies at the protocol level
@@ -111,10 +111,10 @@ Attributes control where and how it is sent:
 | `Domain`, `Path` | Which URLs receive the cookie |
 | `Expires` / `Max-Age` | Lifetime; without them it is a session cookie, deleted when the browser session ends (but browsers that restore the previous session may keep it) |
 | `Secure` | Only sent over HTTPS |
-| `HttpOnly` | Not readable from JavaScript, which protects it from stolen-by-script attacks |
+| `HttpOnly` | Not readable from JavaScript, which protects it from being stolen by injected scripts ([XSS](/security/web-attacks/#xss-data-that-becomes-code)) |
 | `SameSite` | Whether it is sent on requests that come from other sites: `Strict`, `Lax` or `None`. Set it explicitly: browsers differ in the default (Chrome treats a missing value as `Lax`) |
 
-The automatic sending is both the main convenience and the main risk. It is why a login survives page reloads with no code, and also why another site can try to make your browser send a request *with your cookies*. That is the attack that `SameSite` and other defenses exist for. Cookies are also sent with every matching request, including requests for images, so keep them small (about 4 KB is the limit per cookie).
+The automatic sending is both the main convenience and the main risk. It is why a login survives page reloads with no code, and also why another site can try to make your browser send a request *with your cookies*. That is the attack ([CSRF](/security/web-attacks/#csrf-requests-the-user-didnt-mean)) that `SameSite` and other defenses exist for. Cookies are also sent with every matching request, including requests for images, so keep them small (about 4 KB is the limit per cookie).
 
 **Third-party cookies** (cookies of a different site than the one in the address bar) are increasingly restricted. Safari blocks them by default; Firefox partitions them (an embedded site gets a separate cookie jar for each top-level site), so they can't track users across sites. Don't build new features on them.
 
@@ -157,7 +157,7 @@ Related mechanisms:
 
 What this means for a frontend developer:
 
-- **HTTP/1.1** allows about six parallel connections per origin (here: scheme + host + port, such as `https://shop.example`) in browsers. That limit created old tricks: domain sharding (spreading files over several domains), sprites and huge bundles. With HTTP/2 and HTTP/3 these tricks mostly hurt, because extra domains need extra connections.
+- **HTTP/1.1** allows about six parallel connections per [origin](/security/browser-boundaries/#mental-model-origin-site-and-three-kinds-of-access) (here: scheme + host + port, such as `https://shop.example`) in browsers. That limit created old tricks: domain sharding (spreading files over several domains), sprites and huge bundles. With HTTP/2 and HTTP/3 these tricks mostly hurt, because extra domains need extra connections.
 - **HTTP/2** made many small requests cheap, but not free: each file still has overhead, and compression works better on bigger files. Bundling decisions are now about caching and loading only what is needed, not about connection limits.
 - **HTTP/2 server push** is dead: browsers removed it. `103 Early Hints` and `<link rel="preload">` replaced it.
 - **HTTP/3** helps most on unstable mobile networks with packet loss. The browser learns that a server supports it from the `Alt-Svc` header or a DNS record, so the very first visit often uses HTTP/2. If UDP is blocked, it falls back to HTTP/2.
@@ -180,7 +180,7 @@ HTTP is always there, so the question is not whether to use it but how:
 
 - **Where data goes in a request.** Use the path for identity (`/orders/42`), the query for filters and paging (cacheable and shareable), the body for large or sensitive data, and headers for metadata. **Never put secrets in URLs**: URLs end up in logs, browser history and `Referer` headers.
 - **Which method and status code an API uses.** They decide what caches, retries and monitoring can do for you for free.
-- **Cookie or a token in the `Authorization` header** for credentials. Cookies are sent automatically and can be `HttpOnly`; a `Bearer` token needs your code to attach it, so another site can't make the browser send it, but your JavaScript can read it. The full decision is a security topic.
+- **Cookie or a token in the `Authorization` header** for credentials. Cookies are sent automatically and can be `HttpOnly`; a `Bearer` token needs your code to attach it, so another site can't make the browser send it, but your JavaScript can read it. The full decision is in [Authentication and authorization](/security/auth/#where-the-browser-keeps-credentials).
 - **HTTP/2 and HTTP/3** are usually switched on at the CDN or hosting platform, not in your code.
 
 ## Landscape

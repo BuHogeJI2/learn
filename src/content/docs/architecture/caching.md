@@ -57,7 +57,7 @@ Every cache, from a browser to Redis (an in-memory key-value store), is describe
 | 2. Browser HTTP cache | One user | `Cache-Control`, `ETag` response headers | JS/CSS/images, some API responses |
 | 3. Service Worker (a script the browser runs between the page and the network) | One user | Your service worker code | Offline pages, app shell |
 | 4. CDN / edge (servers at the edge of the network, near users) | All users | Headers (`s-maxage`), CDN rules, purge API | Static files, public HTML and API responses |
-| 5. Application cache | All users (per instance or shared) | Your server code | Query results, rendered fragments, sessions |
+| 5. Application cache | All users (per instance or shared) | Your server code | Query results, rendered fragments, [sessions](/security/auth/#sessions-in-practice-the-lifecycle) |
 | 6. Database | All users | The DB itself, materialized views | Hot pages in memory, precomputed results |
 
 The closer a layer is to the user, the faster it is and the harder it is to invalidate. You can purge a CDN or Redis, but you **cannot** reach into a user's browser and delete an entry. That is why browser caching relies on time and on file names, not on purges.

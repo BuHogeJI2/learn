@@ -112,7 +112,7 @@ The most important boundary for rendering and caching: **is this HTML the same f
 - **The same for everyone** (a product page, an article): it can be built once and served from a CDN to all users. SSG, ISR or a cached static shell.
 - **Personal** (a user's name, their cart, prices for their region): it must never end up in a shared cache, or other users will see it. Either render it per request with no shared caching, or serve a public shell and fetch or stream the personal parts separately.
 
-The scope rules are explained in [Caching](/architecture/caching/#mental-model-four-questions-for-every-cache). Who is allowed to see what is a security topic.
+The scope rules are explained in [Caching](/architecture/caching/#mental-model-four-questions-for-every-cache). Who is allowed to see what is covered in [Authentication and authorization](/security/auth/#authorization-checking-what-is-allowed).
 
 ## Typical failures
 

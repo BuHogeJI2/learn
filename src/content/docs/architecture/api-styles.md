@@ -54,7 +54,7 @@ The same data can be served in all three styles. The difference is **who decides
 | Errors | HTTP status codes plus a body, ideally in a standard format such as RFC 9457 | Usually `200 OK` with an `errors` list; partial data possible | Own status codes (gRPC has a fixed set) |
 | Types and tooling | OpenAPI, then code generation | The schema is typed by design; code generation from it | gRPC: generated code for many languages; tRPC: shared TypeScript types, no generation |
 | Browser support | Yes | Yes | tRPC and JSON-RPC: yes; gRPC needs gRPC-Web or Connect |
-| Typical risks | Many endpoints to secure and keep consistent | Expensive or abusive queries; slow nested data loading (N+1); access checks per field | Tight coupling between client and server code |
+| Typical risks | Many endpoints to secure and keep consistent | Expensive or abusive queries; slow nested data loading (N+1); [access checks](/security/auth/#authorization-checking-what-is-allowed) per field | Tight coupling between client and server code |
 
 The **N+1 problem** in GraphQL: a query for 50 orders with their customers can run 1 query for the orders plus 50 queries for the customers. A batching layer (DataLoader) collects them into one.
 
@@ -102,7 +102,7 @@ Retrying a `POST` is dangerous: if the first request actually succeeded and only
 - **Public API for unknown clients:** stability and documentation matter most. REST with OpenAPI is the common denominator that every language and tool understands.
 - **Your own frontend:** the API changes together with the UI. GraphQL, tRPC or framework server functions keep the two in step.
 - **Service-to-service inside your system:** performance, strict types and streaming matter. gRPC is a common choice.
-- **A BFF** (backend for frontend) is a thin server layer made for one client: it calls internal APIs and returns exactly what one screen or app needs.
+- **A [BFF](/architecture/application-boundaries/#where-the-frontend-fits-bff-gateway-micro-frontends)** (backend for frontend) is a thin server layer made for one client: it calls internal APIs and returns exactly what one screen or app needs.
 
 ## Typical failures
 
