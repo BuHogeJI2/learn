@@ -1,6 +1,7 @@
 // @ts-check
 import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
+import starlightLinksValidator from 'starlight-links-validator';
 import { locales } from './src/locales.mjs';
 
 /**
@@ -16,15 +17,19 @@ export default defineConfig({
 	integrations: [
 		starlight({
 			title: 'Learn Book',
+			plugins: [
+				// A Russian page may link to a topic that is not translated yet; it shows the English fallback.
+				starlightLinksValidator({ errorOnFallbackPages: false, errorOnInconsistentLocale: true }),
+			],
 			defaultLocale: 'root',
 			locales,
 			customCss: ['./src/styles/custom.css'],
+			routeMiddleware: './src/routeData.ts',
 			components: {
 				PageTitle: './src/components/PageTitle.astro',
 				MarkdownContent: './src/components/MarkdownContent.astro',
 			},
 			sidebar: [
-			routeMiddleware: './src/routeData.ts',
 				domain('Web platform', 'Веб-платформа', 'web-platform'),
 				domain('Security', 'Безопасность', 'security'),
 				domain('Architecture', 'Архитектура', 'architecture'),

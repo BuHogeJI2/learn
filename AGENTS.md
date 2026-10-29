@@ -48,6 +48,18 @@ Sections, in this order:
 Write about global knowledge, not about one team's stack. Use tables and
 ASCII diagrams where they make the model clearer.
 
+## Terms and inline links
+
+The first time a page mentions a concept the reader may not know, explain it
+in a short phrase in brackets: "CDN (a network of servers placed close to
+users that keep copies of your content)". This applies to every page type.
+
+If that concept has its own written topic, also link the first mention to it,
+with a section anchor when one fits: `[stale-while-revalidate](/architecture/caching/#freshness-strategies)`.
+Use absolute paths; Russian pages link with the `/ru/` prefix. Never link to a
+topic that is not written yet; `npm run build` checks every internal link and
+anchor and fails on a broken one.
+
 ## Writing a tool page
 
 - Always set `concept` and `verified`. Check the latest stable version on npm
@@ -68,6 +80,8 @@ ASCII diagrams where they make the model clearer.
 ## When a topic is written
 
 - Remove it from the `planned` list of its overview page.
+- Search all existing pages, in both languages, for mentions of the new
+  topic, and link the first mention on each page.
 - Add `related` links in both directions where it helps navigation.
 - Check every `officialDocs` URL responds.
 

@@ -16,24 +16,24 @@ officialDocs:
 
 ## What problem it solves
 
-A request travels a long way: browser → network → CDN → application server → database, and back. Every step costs time, and the steps at the end (rendering, queries) also cost money and capacity.
+A request travels a long way: browser → network → CDN (a network of servers placed close to users that keep copies of your content) → application server → database, and back. Every step costs time, and the steps at the end (rendering, queries) also cost money and capacity.
 
 A cache keeps a copy of a result **closer to where it is needed**, so repeated work is skipped. It gives you two things:
 
 - **Speed**: the user gets the answer from a closer, faster place.
-- **Protection of the origin**: the server and the database do less work, so the system survives more traffic for less money.
+- **Protection of the origin** (the server that holds the original data): the server and the database do less work, so the system survives more traffic for less money.
 
 The price is always the same: **the copy can be out of date**, and you now have to decide when to throw it away. Most caching bugs are about this decision.
 
 ## Mental model: four questions for every cache
 
-Every cache, from a browser to Redis, is described by the same four questions. If you can answer them, you understand the cache.
+Every cache, from a browser to Redis (an in-memory key-value store), is described by the same four questions. If you can answer them, you understand the cache.
 
 | Question | Meaning | Examples |
 | --- | --- | --- |
 | **Key** | What identifies an entry? Two requests with the same key get the same answer. | URL + `Vary` headers; function arguments; GraphQL query + variables |
 | **Scope** | Who shares the entry? | One user (browser), everyone (CDN, server cache) |
-| **Freshness** | How long is the entry good without checking? | `max-age=60`, TTL in Redis, `cacheLife('hours')` |
+| **Freshness** | How long is the entry good without checking? | `max-age=60`, TTL (time to live) in Redis, `cacheLife('hours')` |
 | **Invalidation** | How do you remove or refresh it early? | Purge by URL, purge by tag, new file name |
 
 **Scope is the dangerous one.** A personal response (a cart, a user name) stored in a shared cache will be shown to other users. This is a common real incident, not a theory.
@@ -55,8 +55,8 @@ Every cache, from a browser to Redis, is described by the same four questions. I
 | --- | --- | --- | --- |
 | 1. App memory | One tab | Your JS code / client library | API responses, normalized entities |
 | 2. Browser HTTP cache | One user | `Cache-Control`, `ETag` response headers | JS/CSS/images, some API responses |
-| 3. Service Worker | One user | Your service worker code | Offline pages, app shell |
-| 4. CDN / edge | All users | Headers (`s-maxage`), CDN rules, purge API | Static files, public HTML and API responses |
+| 3. Service Worker (a script the browser runs between the page and the network) | One user | Your service worker code | Offline pages, app shell |
+| 4. CDN / edge (servers at the edge of the network, near users) | All users | Headers (`s-maxage`), CDN rules, purge API | Static files, public HTML and API responses |
 | 5. Application cache | All users (per instance or shared) | Your server code | Query results, rendered fragments, sessions |
 | 6. Database | All users | The DB itself, materialized views | Hot pages in memory, precomputed results |
 
@@ -79,7 +79,7 @@ Layers 2 and 4 are controlled by HTTP headers, and most frameworks translate the
 
 **Revalidation.** When a stored copy is stale, the cache doesn't have to download everything again. It asks: "I have version X, is it still current?" using `If-None-Match` (with an `ETag`) or `If-Modified-Since`. If nothing changed, the server answers `304 Not Modified` with no body. This saves bandwidth, but not the round trip.
 
-**`Vary`** adds request headers to the cache key. `Vary: Accept-Language` stores a separate copy per language. `Vary: Cookie` usually kills the hit rate, because every user has different cookies.
+**`Vary`** adds request headers to the cache key. `Vary: Accept-Language` stores a separate copy per language. `Vary: Cookie` usually kills the hit rate (the share of requests answered from the cache), because every user has different cookies.
 
 **A classic setup for a web app:**
 
@@ -131,5 +131,5 @@ A good order of thinking: first make the response cacheable by HTTP (free and st
 - **Browser:** the HTTP cache (built in), the Cache API with Service Workers, client data libraries (Apollo Client, TanStack Query, SWR, RTK Query).
 - **CDN / edge:** Cloudflare, Fastly, Akamai, Amazon CloudFront, the Vercel and Netlify edge networks.
 - **Reverse proxies:** Varnish, Nginx `proxy_cache`.
-- **Application caches:** Redis and Valkey, Memcached, in-process LRU caches; framework caches such as the Next.js `use cache` directive.
+- **Application caches:** Redis and Valkey, Memcached, in-process LRU caches (they drop the least recently used entries first); framework caches such as the [Next.js `use cache` directive](/tools/nextjs/caching/).
 - **Database level:** buffer pools (automatic), materialized views, read replicas. A replica is not a cache, but it solves a similar "too many reads" problem.

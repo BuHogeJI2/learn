@@ -52,13 +52,13 @@ Built-in `cacheLife` profiles: `seconds`, `minutes`, `hours`, `days`, `weeks`, `
 
 **`revalidateTag` vs `updateTag`:**
 
-- `revalidateTag(tag, 'max')` is **stale-while-revalidate**: the next visitor still gets the old data while the new data is generated. Use it for catalogs and blog posts. It works in Server Actions and Route Handlers.
+- `revalidateTag(tag, 'max')` is **[stale-while-revalidate](/architecture/caching/#freshness-strategies)**: the next visitor still gets the old data while the new data is generated. Use it for catalogs and blog posts. It works in Server Actions (server functions called from forms and client code) and Route Handlers (API endpoints inside the `app` directory).
 - `updateTag(tag)` **expires the entry immediately**, so the user who made the change sees it right away ("read your own writes"). It works only in Server Actions.
 
 ## Where cached results live
 
 1. **Prerendered HTML**: on disk or in the platform's storage behind a CDN. This is the static shell, rebuilt according to `revalidate` and `expire`.
-2. **Server store**: by default **in memory, per instance**. On serverless, instances are short-lived, so runtime entries are often lost between requests. `'use cache: remote'` moves entries to a shared, durable cache handler (for example Redis or a platform KV), at the cost of a network round trip and platform fees.
+2. **Server store**: by default **in memory, per instance**. On serverless platforms (each request may run on a new, short-lived instance), instances are short-lived, so runtime entries are often lost between requests. `'use cache: remote'` moves entries to a shared, durable cache handler (for example Redis or a platform KV), at the cost of a network round trip and platform fees.
 3. **Browser**: the client router keeps results for their `stale` time, with a minimum of 30 seconds.
 
 All three are scoped to **one deployment**: the build ID is part of the key, so every deploy starts with a cold cache.
