@@ -15,7 +15,7 @@ An online shop's product page shows a product description (edited a few times a 
 
 Split the page by **freshness** and **scope**:
 
-- **Description**: shared, rarely changes. Cache for a long time at the CDN or server level and invalidate on edit (a tag like `product:42` purged by a CMS or admin webhook).
+- **Description**: shared, rarely changes. Cache for a long time at the CDN or server level and invalidate on edit (a tag like `product:42` purged by a [CMS](/data/cms/) or admin webhook).
 - **Price**: shared, changes often. Use a short TTL with stale-while-revalidate, or a separate small request with its own short lifetime. Don't let the price dictate the lifetime of the whole page.
 - **Cart**: personal. Never put it in a shared cache. Fetch it per user (`Cache-Control: private` or `no-store`), or keep it in client state.
 
@@ -80,7 +80,7 @@ Options, often combined:
 
 ## 5. "Fast, but published content must appear within a minute"
 
-Content comes from a CMS. Editors want changes live within a minute after publishing. The site must be fast. What strategy do you choose?
+Content comes from a [CMS](/data/cms/). Editors want changes live within a minute after publishing. The site must be fast. What strategy do you choose?
 
 <details>
 <summary>Answer</summary>

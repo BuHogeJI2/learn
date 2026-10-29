@@ -136,4 +136,4 @@ Useful switches: **Disable cache** (to see a first visit), **throttling** (to si
 
 - **Browser tools:** DevTools Network and Performance panels, Lighthouse.
 - **Lab testing:** WebPageTest (filmstrips, waterfalls, real devices and locations), PageSpeed Insights.
-- **Field data:** Chrome UX Report (CrUX), and real-user monitoring (RUM) tools such as Vercel Speed Insights, Sentry, SpeedCurve, or the `web-vitals` library sending data to your own analytics.
+- **Field data:** Chrome UX Report (CrUX), and [real-user monitoring](/observability/logs-metrics-traces/) (RUM) tools such as Vercel Speed Insights, Sentry, SpeedCurve, or the `web-vitals` library sending data to your own analytics.

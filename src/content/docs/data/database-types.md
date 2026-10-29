@@ -22,7 +22,7 @@ officialDocs:
 
 Every app stores data, and the database decides which questions are easy to ask, which guarantees you get, how the system grows, and how much it costs to run. It is one of the hardest decisions to change later: code is rewritten, but data stays and has to be migrated.
 
-For a frontend developer this shows up as: how the API can paginate and filter, whether search is possible, whether "my change disappeared" bugs happen, and, in full-stack frameworks and serverless platforms (code that the platform starts on demand, with no server running all the time), which database you pick for your own project.
+For a frontend developer this shows up as: how the API can paginate and filter, whether search is possible, whether "my change disappeared" bugs happen, and, in full-stack frameworks and [serverless](/delivery/deployment-models/) platforms (code that the platform starts on demand, with no server running all the time), which database you pick for your own project.
 
 ## Mental model: a data structure on disk, plus guarantees
 
@@ -31,7 +31,7 @@ Every database is a combination of four things:
 1. **Data model**: tables, documents, key-value pairs, graphs.
 2. **Indexes**: which lookups are fast.
 3. **Guarantees**: transactions and consistency (see [Data consistency](/data/consistency/)).
-4. **Scaling model**: one machine, copies, or data split across many machines.
+4. **[Scaling](/architecture/scaling/) model**: one machine, copies, or data split across many machines.
 
 So you choose by **access patterns**: what you read and write, how often, and by which key or condition.
 
@@ -48,7 +48,7 @@ A second split is by workload:
 | --- | --- | --- | --- | --- |
 | **Relational** (SQL) | Tables with a fixed schema (the declared columns and their types); relations through keys; joins (combining rows of several tables in one query) | Flexible queries, constraints, transactions, questions you didn't plan for | Scaling writes across machines; schema changes need migrations | PostgreSQL, MySQL, SQLite, SQL Server |
 | **Document** | JSON-like documents, nested; flexible shape | Reading and writing a whole object at once; data with varying shapes | Relations between documents; joins | MongoDB, Firestore, Couchbase |
-| **Key-value** | A value under a key | Very fast simple access: [caches](/architecture/caching/), sessions, counters, rate limits (caps on how often a client may call) | Any query that isn't by key | Redis, Valkey, Memcached, Cloudflare KV, DynamoDB (also documents) |
+| **Key-value** | A value under a key | Very fast simple access: [caches](/architecture/caching/), sessions, counters, [rate limits](/architecture/reliability/#protecting-a-service-from-overload) (caps on how often a client may call) | Any query that isn't by key | Redis, Valkey, Memcached, Cloudflare KV, DynamoDB (also documents) |
 | **Wide-column** | Rows grouped by a partition key, spread over many machines | Huge write volume with access by known keys | Ad-hoc queries; you design tables per query | Cassandra, ScyllaDB, Bigtable, HBase |
 | **Search engine** | An **inverted index** (word → documents that contain it) | Full-text search, relevance ranking, typos, filters with counts (facets) | Being the source of truth; updates appear with a delay | Elasticsearch, OpenSearch, Meilisearch, Typesense, Algolia |
 | **Graph** | Nodes and edges | Queries over many hops: friends of friends, recommendations, fraud rings | Simple high-volume reads and writes | Neo4j, Amazon Neptune |
@@ -62,7 +62,7 @@ Files (images, video, uploads) belong in **object storage** (Amazon S3, Cloudfla
 
 **Relational** fits when data has many relations, you will query it in ways you don't know yet, and correctness matters: users, orders, payments, inventory.
 
-**Document** fits when data is naturally a **self-contained object** that is read and written as a whole and whose shape varies: a CMS page made of blocks, a product with many variant attributes, event payloads.
+**Document** fits when data is naturally a **self-contained object** that is read and written as a whole and whose shape varies: a [CMS](/data/cms/) page made of blocks, a product with many variant attributes, event payloads.
 
 An order with items, both ways:
 
@@ -105,7 +105,7 @@ Each extra store is another copy that can be stale ([consistency](/data/consiste
 - **Read replicas**: copies that serve reads. They lag behind the primary, which causes stale reads.
 - **Partitioning**: splitting a big table into pieces by a key (for example by month) inside one database. It makes large tables easier to manage and some queries faster, but adds no machines.
 - **Sharding**: splitting data by a key across several machines, each holding a part. Queries and transactions across shards become hard, and the key is hard to change.
-- **Connection limits**: serverless functions can open thousands of connections and exhaust a SQL database. Use a connection pooler or an HTTP-based driver.
+- **Connection limits**: [serverless functions](/delivery/deployment-models/) can open thousands of connections and exhaust a SQL database. Use a connection pooler or an HTTP-based driver.
 - **Distributed SQL** (Spanner, CockroachDB, YugabyteDB, TiDB): SQL and transactions spread over many machines, paid for with higher latency and cost.
 
 ## Typical failures

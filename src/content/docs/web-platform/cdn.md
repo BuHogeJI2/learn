@@ -49,7 +49,7 @@ Users never talk to the origin directly. Ideally, the origin accepts traffic **o
 3. **Modern protocols for free.** The CDN speaks HTTP/2, HTTP/3, TLS 1.3 and Brotli compression to users, even if your origin doesn't. See [HTTP versions](/web-platform/http/#http-versions-same-meaning-different-transport).
 4. **Origin shielding and tiered caching.** Instead of every PoP asking the origin on a cache miss, PoPs ask a regional **shield** PoP first. If many users request the same missing file at once, the CDN sends one request to the origin and shares the answer (**request collapsing**).
 5. **Routing.** Rules send `/api/*` to API servers and everything else to static storage, apply redirects and rewrites, split traffic for A/B tests, and switch to a backup origin if the main one fails.
-6. **Protection.** A CDN absorbs **DDoS** attacks (Distributed Denial of Service: flooding a site with traffic from many machines) thanks to its sheer capacity, and offers a **WAF** (web application firewall: rules that block malicious requests), bot detection and rate limiting.
+6. **Protection.** A CDN absorbs **DDoS** attacks (Distributed Denial of Service: flooding a site with traffic from many machines) thanks to its sheer capacity, and offers a **WAF** (web application firewall: rules that block malicious requests), bot detection and [rate limiting](/architecture/reliability/#protecting-a-service-from-overload).
 7. **Edge compute**: running your own code in the PoPs (below).
 8. **Image optimization**: resizing and converting images to modern formats on the fly.
 
@@ -59,7 +59,7 @@ Code can run in three kinds of places:
 
 | Place | Close to | Typical runtime |
 | --- | --- | --- |
-| **Origin region** | Your database | Full Node.js, containers, serverless functions (started on demand, with no server running all the time) in one region |
+| **Origin region** | Your database | Full Node.js, containers, [serverless functions](/delivery/deployment-models/) (started on demand, with no server running all the time) in one region |
 | **Edge** (every PoP) | The user | Lightweight isolates: start in milliseconds, limited APIs, short CPU time |
 | **Several regions** | Users and regional data replicas | Same as origin, deployed multiple times |
 

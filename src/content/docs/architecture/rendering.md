@@ -135,7 +135,7 @@ Ask, per route:
 
 Rules of thumb:
 
-- **Docs, blogs, marketing:** static, with islands for the few interactive parts; regenerate on demand when the CMS publishes.
+- **Docs, blogs, marketing:** static, with islands for the few interactive parts; regenerate on demand when the [CMS publishes](/data/cms/#drafts-preview-and-publishing).
 - **E-commerce:** a static or ISR catalog, with cart and personal prices fetched or streamed separately.
 - **Dashboards behind login:** SSR with streaming, or CSR. Search engines don't matter, and almost everything is personal.
 - **Highly interactive tools** (editors, design tools): CSR, with the server providing the API.

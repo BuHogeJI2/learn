@@ -89,7 +89,7 @@ Not all errors are the same, and the contract should make the difference clear:
 
 | Kind | Example | What the client does |
 | --- | --- | --- |
-| Transport | No network, timeout | Retry, maybe |
+| Transport | No network, timeout | [Retry](/architecture/reliability/#retries-bounded-spaced-and-safe), maybe |
 | Protocol | `401`, `404`, `429`, `503` | React to the class: log in, show "not found", wait and retry |
 | Domain | "Not enough stock", "Email already used" | Show a specific message; a retry won't help |
 
@@ -110,7 +110,7 @@ Retrying a `POST` is dangerous: if the first request actually succeeded and only
 - **GraphQL without limits.** A client can send a deeply nested query that takes the server down. Add depth and cost limits, or allow only known (persisted) queries.
 - **N+1 queries** behind GraphQL resolvers or REST endpoints that load related data one row at a time.
 - **Shipping a breaking change before clients are updated.**
-- **`200 OK` with an error inside** for a REST API: monitoring sees success, and caches store the error.
+- **`200 OK` with an error inside** for a REST API: [monitoring](/observability/logs-metrics-traces/) sees success, and caches store the error.
 - **Chatty APIs.** A screen needs 15 calls in a chain; each adds a round trip (the time for a request to reach the server and come back). Aggregate them on the server (BFF, GraphQL).
 - **Exposing the database model.** Once clients depend on your table structure, you can't change the database.
 

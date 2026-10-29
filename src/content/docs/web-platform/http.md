@@ -58,7 +58,7 @@ Two ideas explain most of HTTP's behavior:
 A method tells everyone on the path (browser, proxies, [CDN](/web-platform/cdn/), crawlers) what kind of operation this is. Two properties matter most:
 
 - **Safe**: the request is not expected to change anything on the server.
-- **Idempotent**: sending the same request twice has the same effect as sending it once. This makes it safe to **retry** after a timeout.
+- **Idempotent**: sending the same request twice has the same effect as sending it once. This makes it safe to **[retry](/architecture/reliability/#retries-bounded-spaced-and-safe)** after a timeout.
 
 | Method | Typical use | Safe | Idempotent | Cacheable |
 | --- | --- | --- | --- | --- |
@@ -87,7 +87,7 @@ The first digit is the class, and it is what most software looks at:
 What the codes tell you in practice:
 
 - **Retry or not.** Most `4xx` codes will fail again unless the request changes, so don't retry them. `429`, `503` and some other `5xx` codes may succeed later: retry a few times with a growing delay, and respect `Retry-After` if the server sends it. But the status alone doesn't make a retry safe. A `500` after a `POST` may mean the order was already created; retry only idempotent requests, or requests with an [idempotency key](/architecture/api-styles/#error-boundaries).
-- **Where to look.** `502` and `504` come from something **in the middle** (a CDN, a load balancer, a proxy) that couldn't get an answer from the server behind it. The bug is often in that upstream server, or in the connection to it, not in the proxy.
+- **Where to look.** `502` and `504` come from something **in the middle** (a CDN, a [load balancer](/architecture/scaling/#load-balancing), a proxy) that couldn't get an answer from the server behind it. The bug is often in that upstream server, or in the connection to it, not in the proxy.
 - **Permanent really means permanent.** Browsers cache `301` and `308` redirects, sometimes for a very long time. A wrong permanent redirect is hard to undo. `307` and `308` also guarantee that the method and body are kept; `301` and `302` historically allowed clients to switch `POST` to `GET`.
 
 ## Headers: metadata that drives behavior
@@ -167,7 +167,7 @@ You can see the version of each request in the browser's Network tab, in the Pro
 ## Typical failures
 
 - **`GET` with side effects.** Prefetching, crawlers or link previews trigger the action.
-- **`200 OK` with an error in the body.** Caches store the error as a success, monitoring counts it as success, and clients can't decide whether to retry. (GraphQL is a special case; see [API styles](/architecture/api-styles/#how-they-compare).)
+- **`200 OK` with an error in the body.** Caches store the error as a success, [monitoring](/observability/logs-metrics-traces/) counts it as success, and clients can't decide whether to retry. (GraphQL is a special case; see [API styles](/architecture/api-styles/#how-they-compare).)
 - **A permanent redirect for a temporary move.** Browsers remember it, and you can't call it back.
 - **Mixed content.** An HTTPS page loads a script or image over `http://`. Browsers block or upgrade it, and the page breaks.
 - **Missing cookie attributes.** A session cookie without `Secure`, `HttpOnly` and `SameSite` is easier to steal or misuse.

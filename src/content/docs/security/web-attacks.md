@@ -44,7 +44,7 @@ Frontend code is where most XSS bugs appear, so this is the frontend developer's
 
 ## XSS: data that becomes code
 
-XSS happens when data from outside (a comment, a URL parameter, a CMS field) ends up in a place where the browser interprets it as HTML or JavaScript.
+XSS happens when data from outside (a comment, a URL parameter, a [CMS](/data/cms/) field) ends up in a place where the browser interprets it as HTML or JavaScript.
 
 - **Stored XSS**: the payload is saved (a comment, a profile name) and shown to every visitor.
 - **Reflected XSS**: the payload comes from the request (a search query in the URL) and is echoed back in the response.

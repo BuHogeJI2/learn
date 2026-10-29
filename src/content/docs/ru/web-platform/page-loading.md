@@ -119,4 +119,4 @@ description: Путь от введённого URL до пикселей на �
 
 - **Инструменты браузера:** панели Network и Performance в DevTools, Lighthouse.
 - **Лабораторное тестирование:** WebPageTest (filmstrip, waterfall, реальные устройства и локации), PageSpeed Insights.
-- **Полевые данные:** Chrome UX Report (CrUX) и инструменты мониторинга реальных пользователей (RUM), например Vercel Speed Insights, Sentry, SpeedCurve, или библиотека `web-vitals`, отправляющая данные в вашу аналитику.
+- **Полевые данные:** Chrome UX Report (CrUX) и инструменты [мониторинга реальных пользователей](/ru/observability/logs-metrics-traces/) (RUM), например Vercel Speed Insights, Sentry, SpeedCurve, или библиотека `web-vitals`, отправляющая данные в вашу аналитику.

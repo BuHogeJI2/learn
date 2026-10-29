@@ -36,7 +36,7 @@ As a product grows, more people work on more code. Questions appear that code st
 A boundary can exist at three levels, and they can be chosen separately:
 
 1. **Code boundary** (module): which code may call which. Enforced by the language and tooling. Cheap to move.
-2. **Deployment boundary** (deployable unit): what ships, scales and fails together. Each unit has its own pipeline, version and runtime.
+2. **Deployment boundary** (deployable unit): what ships, scales and fails together. Each unit has its own pipeline, version and runtime ([deployment models](/delivery/deployment-models/)).
 3. **Data boundary**: who owns which tables. Other parts use the owner's API, not its database.
 
 Above them sits **ownership**: which team is responsible. **Conway's law** says systems end up mirroring the communication structure of the organization that builds them, so team boundaries and system boundaries pull toward each other.
@@ -50,13 +50,13 @@ Above them sits **ownership**: which team is responsible. **Conway's law** says 
 | Failure blast radius | A bug or overload can affect the whole app | Same as a monolith, with clearer ownership | Can stay inside one service, if others don't depend on it synchronously and handle its failures |
 | Transactions across parts | Easy | Easy | Hard: [sagas and idempotency](/data/consistency/#across-services-no-shared-transaction) |
 | Fits | One or few teams | Several teams, one product | Many teams that need independent releases |
-| Operating cost | Low | Low | High: deployment, monitoring, tracing, versioning |
+| Operating cost | Low | Low | High: deployment, [monitoring, tracing](/observability/logs-metrics-traces/), versioning |
 
 ## Splitting options
 
 ### Monolith
 
-One deployable application. Easy to develop, test, deploy and debug; refactoring across the whole codebase is a normal change; one database transaction covers everything. A monolith also scales further than people think: run several copies behind a load balancer.
+One deployable application. Easy to develop, test, deploy and debug; refactoring across the whole codebase is a normal change; one database transaction covers everything. A monolith also scales further than people think: run several copies behind a [load balancer](/architecture/scaling/#load-balancing).
 
 Monoliths get a bad name when they have no **internal** boundaries (a "big ball of mud"), not because they are deployed as one unit.
 
@@ -73,20 +73,20 @@ Independently deployable services, each built around a business capability (orde
 Benefits:
 
 - teams release on their own schedule;
-- each service scales on its own, and its failures *can* stay contained, if the services that call it have timeouts and fallbacks;
+- each service scales on its own, and its failures *can* stay contained, if the services that call it have [timeouts and fallbacks](/architecture/reliability/#timeouts-and-deadlines);
 - each can choose the technology that fits it.
 
 Costs:
 
-- every call can be slow or fail, so you need timeouts, retries and idempotency;
+- every call can be slow or fail, so you need [timeouts, retries and idempotency](/architecture/reliability/);
 - no joins and no transactions across services;
 - API changes between services must stay compatible: additive changes, deprecation periods and, when needed, versions ([API evolution](/architecture/api-styles/#evolution-the-long-term-cost));
-- debugging one user request means following it through many services, which needs distributed tracing;
+- debugging one user request means following it through many services, which needs [distributed tracing](/observability/logs-metrics-traces/);
 - running everything locally becomes hard.
 
 The worst case is a **distributed monolith**: services that must be deployed together, or that read and write each other's tables. You pay the costs of both styles and get the benefits of neither.
 
-Note that **serverless functions** (code that the platform starts on demand, with no server running all the time) **are a deployment model, not an architecture**: a monolith can run as functions, and a service can run in a container.
+Note that **[serverless functions](/delivery/deployment-models/)** (code that the platform starts on demand, with no server running all the time) **are a deployment model, not an architecture**: a monolith can run as functions, and a service can run in a container.
 
 ## Where the frontend fits: BFF, gateway, micro-frontends
 
@@ -97,7 +97,7 @@ Mobile  ──► BFF (app) ─┼──► Users service
                        └──► …
 ```
 
-- **API gateway**: one shared entry point in front of all services. It routes requests and handles common concerns such as checking credentials, rate limiting (capping how often a client may call) and logging. It is generic and usually owned by a platform team.
+- **API gateway**: one shared entry point in front of all services. It routes requests and handles common concerns such as checking credentials, [rate limiting](/architecture/reliability/#protecting-a-service-from-overload) (capping how often a client may call) and logging. It is generic and usually owned by a platform team.
 - **BFF** (backend for frontend): a server layer **for one kind of client** (web, mobile app), usually owned by the team that builds that client. It calls several services and returns exactly what a screen needs, keeps tokens on the server ([where credentials live](/security/auth/#where-the-browser-keeps-credentials)), and often renders the HTML. In practice, the server of a full-stack framework such as Next.js often *is* the BFF. A GraphQL layer that combines several services is another way to compose APIs for clients ([API styles](/architecture/api-styles/)).
 - **Micro-frontends**: the UI split into parts that different teams build and deploy independently, combined at build time, on the server or in the browser. The cheapest split is **by route** (each team owns whole pages); splitting one page into parts from different deployments is much harder. They solve an organizational problem: many teams working on one UI. The costs are duplicated dependencies, a less consistent UX, harder shared state and routing, and often worse performance. With one or two frontend teams, they usually cost more than they give.
 
@@ -126,7 +126,7 @@ Mobile  ──► BFF (app) ─┼──► Users service
 ## Landscape
 
 - **Module boundaries in one codebase:** Nx module boundary rules, dependency-cruiser, ESLint boundary plugins, Spring Modulith (Java), Packwerk (Ruby, from Shopify).
-- **Communication between services:** REST, gRPC and GraphQL ([API styles](/architecture/api-styles/)), message brokers, service meshes (Istio, Linkerd) that handle traffic, retries and encryption between services.
+- **Communication between services:** REST, gRPC and GraphQL ([API styles](/architecture/api-styles/)), [message brokers](/architecture/background-jobs/), service meshes (Istio, Linkerd) that handle traffic, retries and encryption between services.
 - **API gateways:** Kong, Amazon API Gateway, Apigee, Envoy-based gateways, Cloudflare.
 - **BFF and API composition:** full-stack framework servers (Next.js, React Router, Nuxt, SvelteKit), Apollo Federation, Hive Gateway.
 - **Micro-frontends:** Module Federation (webpack, Rspack), single-spa, Native Federation, iframes, web components.

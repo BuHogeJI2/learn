@@ -93,7 +93,7 @@ Layers 2 and 4 are controlled by [HTTP headers](/web-platform/http/#headers-meta
 3. **Event-based invalidation.** When data changes, you explicitly purge the related entries: by key, by URL or by **tag** (for example, every entry tagged `product:42`). The data is fresh almost immediately, but you must know which entries depend on which data. Tags make this manageable.
 4. **Versioned keys.** Never invalidate; change the key instead (a hash in the file name, a version number in the key). This is the most reliable method, but it only works where you control the reference to the key.
 
-In practice you combine them: a long TTL as a safety net plus event-based invalidation on change. For example, CMS content is cached "forever" with tags, and a publish webhook purges the tag.
+In practice you combine them: a long TTL as a safety net plus event-based invalidation on change. For example, [CMS](/data/cms/) content is cached "forever" with tags, and a publish webhook purges the tag.
 
 **Patterns for server-side caches:**
 
@@ -107,7 +107,7 @@ In practice you combine them: a long TTL as a safety net plus event-based invali
 - **Cache stampede (thundering herd).** A popular entry expires, and thousands of requests miss at the same moment and hit the database together. Fixes: stale-while-revalidate, request coalescing (only one request refreshes, the others wait), random jitter on TTLs, or refreshing on events instead of on time.
 - **Low hit rate.** Keys are too specific, so entries are rarely reused. Typical causes: tracking parameters (`?utm_source=…`) in the URL, `Vary: Cookie`, timestamps in keys. Normalize keys and measure the hit rate before trusting a cache.
 - **Stacked staleness.** Browser, CDN and server caches each have their own TTL, so in the worst case the data is as old as all of them together. To debug, check the response headers: `Age` (seconds the copy has been in a shared cache) and the CDN status header (`x-vercel-cache`, `cf-cache-status`, `x-cache`) tell you which layer answered.
-- **Cold cache after deploy.** Many caches are tied to a deployment or to process memory. After a deploy or restart, the first requests are slow and the origin gets a spike of load.
+- **Cold cache after [deploy](/delivery/deployment-models/).** Many caches are tied to a deployment or to process memory. After a deploy or restart, the first requests are slow and the origin gets a spike of load.
 
 ## When to cache and when not to
 

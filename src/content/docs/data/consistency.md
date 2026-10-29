@@ -94,7 +94,7 @@ An order flow often touches your database, a payment provider, a warehouse servi
 
 - **Make every step idempotent and retryable**, with an [idempotency key](/architecture/api-styles/#error-boundaries), so a retry never charges twice.
 - **Sagas**: a sequence of local transactions, each with a **compensating action** that undoes it in business terms. If the stock reservation fails after the payment, the compensation is a refund. Intermediate states ("payment received, stock pending") are visible and must be designed for.
-- **The dual-write problem**: "save the order, then publish an 'order created' message" fails if the process crashes between the two steps; the order exists, but nobody hears about it. The **transactional outbox** pattern writes the message into the same database transaction as the order, and a separate process publishes it later.
+- **The dual-write problem**: "save the order, then publish an 'order created' message" fails if the process crashes between the two steps; the order exists, but nobody hears about it. The **transactional outbox** pattern writes the message into the same database transaction as the order, and a separate process publishes it later ([background jobs](/architecture/background-jobs/#getting-messages-out-reliably)).
 - **Show intermediate states in the UI**: "Processing", "Pending confirmation". Pretending a multi-step flow is instant leads to confusing errors later.
 
 ## Typical failures

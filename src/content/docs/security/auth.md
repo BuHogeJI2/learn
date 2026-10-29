@@ -95,7 +95,7 @@ For your own web app with your own backend, the sensible default is an **`HttpOn
 
 - **On the server, on every request, for the specific object.** "Is this user allowed to edit *this* document?", not only "is this user logged in?".
 - **The UI only reflects permissions.** Hiding a button is UX, not security; the endpoint behind it must check again.
-- **Every entry point checks**: REST endpoints, GraphQL resolvers (field by field, see [API styles](/architecture/api-styles/#how-they-compare)), framework server functions, webhooks, background jobs.
+- **Every entry point checks**: REST endpoints, GraphQL resolvers (field by field, see [API styles](/architecture/api-styles/#how-they-compare)), framework server functions, webhooks, [background jobs](/architecture/background-jobs/).
 
 The missing object check has a name: **IDOR** (insecure direct object reference). Broken access control, the category it belongs to, is the first item of the OWASP Top 10.
 
@@ -145,7 +145,7 @@ App backend creates its OWN session → cookie to the browser
 - **Session ID not renewed at login**, or sessions that never expire.
 - **Different rules in different services**, each implemented slightly differently.
 - **Home-made password storage or crypto** instead of proven libraries or providers.
-- **Login and password reset without rate limits** (caps on how many attempts a client may make), which invites credential stuffing (trying passwords leaked from other sites), and messages that reveal whether an account exists.
+- **Login and password reset without [rate limits](/architecture/reliability/#protecting-a-service-from-overload)** (caps on how many attempts a client may make), which invites credential stuffing (trying passwords leaked from other sites), and messages that reveal whether an account exists.
 
 ## How to choose
 

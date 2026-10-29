@@ -58,7 +58,7 @@ Built-in `cacheLife` profiles: `seconds`, `minutes`, `hours`, `days`, `weeks`, `
 ## Where cached results live
 
 1. **Prerendered HTML**: on disk or in the platform's storage behind a CDN. This is the static shell, rebuilt according to `revalidate` and `expire`.
-2. **Server store**: by default **in memory, per instance**. On serverless platforms (each request may run on a new, short-lived instance), instances are short-lived, so runtime entries are often lost between requests. `'use cache: remote'` moves entries to a shared, durable cache handler (for example Redis or a platform KV), at the cost of a network round trip and platform fees.
+2. **Server store**: by default **in memory, per instance**. On [serverless](/delivery/deployment-models/) platforms (each request may run on a new, short-lived instance), instances are short-lived, so runtime entries are often lost between requests. `'use cache: remote'` moves entries to a shared, durable cache handler (for example Redis or a platform KV), at the cost of a network round trip and platform fees.
 3. **Browser**: the client router keeps results for their `stale` time, with a minimum of 30 seconds.
 
 All three are scoped to **one deployment**: the build ID is part of the key, so every deploy starts with a cold cache.
@@ -70,7 +70,7 @@ All three are scoped to **one deployment**: the build ID is part of the key, so 
 - **`Math.random()`, `Date.now()` and `crypto.randomUUID()` need a decision.** Either call `await connection()` first and wrap the component in `<Suspense>` (a new value per request), or put it in `'use cache'` (one shared value).
 - **`<Suspense>` alone doesn't make something dynamic.** It only provides the fallback. What makes a part request-time is the data it reads.
 - **Bots get a fully dynamic render.** Some crawlers need complete metadata in `<head>`, so Next.js detects them and skips the static shell.
-- **Draft Mode bypasses all `'use cache'` entries.** This is how CMS previews see unpublished content.
+- **Draft Mode bypasses all `'use cache'` entries.** This is how [CMS previews](/data/cms/#drafts-preview-and-publishing) see unpublished content.
 
 ## How this maps to plain HTTP caching
 

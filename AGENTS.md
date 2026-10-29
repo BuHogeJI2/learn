@@ -197,6 +197,41 @@ notice, so links never break.
 | micro-frontends | микрофронтенды | Russian |
 | API gateway, bounded context, service mesh, big ball of mud | same | English |
 | Conway's law | закон Конвея | Russian |
+| deployment model, artifact, instance | модель деплоя, артефакт, инстанс | Russian |
+| container, image, orchestrator | контейнер, образ, оркестратор | Russian |
+| cold start, PaaS, VM, isolate | same (isolate: изолят) | English |
+| CI/CD, pipeline | CI/CD, пайплайн | Russian |
+| continuous integration, delivery, deployment | непрерывная интеграция, поставка, развёртывание | Russian |
+| rolling, blue-green, canary, recreate | same | English |
+| feature flag | фича-флаг | Russian |
+| preview deployment, version skew, skew protection, infrastructure as code | same | English |
+| readiness check, liveness, drain | same | English |
+| observability | observability (with a short Russian explanation; the user dislikes «наблюдаемость») | English |
+| monitoring, logs, metrics, traces, span | мониторинг, логи, метрики, трейсы, спан | Russian |
+| sampling, head sampling, tail sampling | сэмплирование; head/tail sampling stay English | Russian |
+| cardinality, percentile, histogram | кардинальность, перцентиль, гистограмма | Russian |
+| SLI, SLO, SLA, error budget, burn rate, runbook, RUM | same | English |
+| alert, dashboard, on-call | алерт, дашборд, дежурство | Russian |
+| saturation | насыщение (saturation) | Russian |
+| alert fatigue, source maps | same | English |
+| bottleneck, headroom, load balancer | узкое место, запас мощности, балансировщик нагрузки | Russian |
+| vertical, horizontal scaling, autoscaling | вертикальное, горизонтальное масштабирование, автомасштабирование | Russian |
+| sticky sessions, health check, hot spot | sticky sessions, health check, горячая точка | English / Russian |
+| Little's law | закон Литтла | Russian |
+| timeout, deadline, retry | таймаут, дедлайн, повтор | Russian |
+| backoff, exponential backoff, retry budget, retry storm | same | English |
+| circuit breaker, fallback, graceful degradation, load shedding, backpressure, bulkhead | same | English |
+| token bucket, cascading failure | token bucket, каскадный сбой | English / Russian |
+| durable execution, fault injection, chaos engineering | same | English |
+| job queue, producer, consumer, worker | очередь задач, производитель, потребитель, обработчик | Russian |
+| pub/sub, offset, partition key, backlog | same | English |
+| at least once, at most once, exactly once, effectively once | same | English |
+| acknowledgement, visibility timeout | подтверждение (ack), visibility timeout | Russian / English |
+| poison message, dead-letter queue (DLQ) | same | English |
+| polling, long polling, SSE, WebSocket, heartbeat, fan-out | same | English |
+| sync engine, inbox | same | English |
+| content model, editorial workflow, draft, preview | модель контента, редакционный процесс, черновик, превью | Russian |
+| headless, slug, page builder, DXP, visual editing | headless, slug, конструктор страниц, DXP, визуальное редактирование | English / Russian |
 
 ## Development
 
