@@ -96,6 +96,15 @@ export async function getTopicConnections(page: Doc, locale: string | undefined)
 	};
 }
 
+/** Returns the localized title of the topic a site link points to, or `undefined` for other links. */
+export async function getTitleByHref(href: string, locale: string | undefined) {
+	const { sources, linkTo } = await loadTopics();
+	for (const source of sources.values()) {
+		const link = linkTo(source, locale);
+		if (link.href === href) return link.title;
+	}
+}
+
 /** Lists written topics under a domain page, localized for `locale`, excluding quizzes and the domain page itself. */
 export async function getDomainTopics(page: Doc, locale: string | undefined): Promise<TopicLink[]> {
 	const { sources, linkTo } = await loadTopics();

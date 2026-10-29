@@ -24,6 +24,7 @@ export default defineConfig({
 				MarkdownContent: './src/components/MarkdownContent.astro',
 			},
 			sidebar: [
+			routeMiddleware: './src/routeData.ts',
 				domain('Web platform', 'Веб-платформа', 'web-platform'),
 				domain('Security', 'Безопасность', 'security'),
 				domain('Architecture', 'Архитектура', 'architecture'),
