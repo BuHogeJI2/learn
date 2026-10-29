@@ -46,7 +46,7 @@ The familiar names are combinations of answers:
 | **ISR** (incremental static regeneration) | Server | At build, then regenerated in the background after a time or on demand | Hydrated |
 | **Streaming SSR** | Server | On each request, sent in pieces | Parts hydrated as they arrive |
 | **Islands** | Server or build | Build or request | Only the interactive "islands" get JavaScript |
-| **Server Components** (React components that run only on the server) | Server or build | Build or request | Only client components and the code they import ship JavaScript |
+| **[Server Components](/tools/react/server-components/)** (React components that run only on the server) | Server or build | Build or request | Only client components and the code they import ship JavaScript |
 
 They **combine**. One page can be a static shell (the parts that are the same for everyone, prerendered once) from the build, with a personal block streamed per request, and only a search box hydrated. Modern frameworks decide this **per route** or even **per component**, not per app.
 
@@ -87,7 +87,7 @@ The newer approaches all try to hydrate less:
 
 - **Islands**: the page is static HTML; only marked interactive parts get JavaScript and hydrate independently.
 - **Server Components**: components that only render (no state, no handlers) run on the server or at build, and their code is never sent to the browser.
-- **Selective hydration**: React hydrates each `<Suspense>` boundary separately and first hydrates the part the user is interacting with.
+- **Selective hydration**: React hydrates each [`<Suspense>`](/tools/react/suspense/) boundary separately and first hydrates the part the user is interacting with.
 - **Resumability** (Qwik): the server saves enough state in the HTML that the browser doesn't re-execute components at all; code loads only when an interaction needs it.
 
 ## Streaming

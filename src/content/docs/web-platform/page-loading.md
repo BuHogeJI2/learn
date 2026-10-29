@@ -69,7 +69,7 @@ Between pressing Enter and seeing a page, about a dozen steps happen, and any of
 | **CLS** (Cumulative Layout Shift) | How much content jumps around | 6 |
 | **INP** (Interaction to Next Paint) | How fast the page reacts to input | 7 |
 
-The bold three are the **Core Web Vitals**, the metrics Google uses to judge real-user experience.
+The bold three are the **[Core Web Vitals](/observability/web-vitals/)**, the metrics Google uses to judge real-user experience.
 
 ## Reading the Network tab
 

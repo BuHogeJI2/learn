@@ -54,7 +54,7 @@ Two moments matter:
 
 [Rendering strategies](/architecture/rendering/) decide how much work happens at build time and how much at request time. The deployment model decides **where** the request-time code runs.
 
-A deploy is usually two things: an **immutable artifact** (the build output or a container image, never changed after it is built) and **configuration** (environment variables, secrets). The Twelve-Factor App calls this separating config from code: the same artifact goes through staging and production, and only the configuration differs.
+A deploy is usually two things: an **immutable artifact** (the build output or a [container image](/delivery/containers/), never changed after it is built) and **configuration** (environment variables, secrets). The Twelve-Factor App calls this separating config from code: the same artifact goes through staging and production, and only the configuration differs.
 
 One catch for frontends: configuration that ends up in the browser bundle is read at **build** time. A `NEXT_PUBLIC_` or `VITE_` variable is copied into the JavaScript, and changing it later on the server changes nothing. To promote one artifact through environments, load such values at runtime (for example from a small config endpoint, or a script the server injects into the page), or accept a separate build per environment.
 
@@ -76,9 +76,9 @@ Some details behind the table:
 
 ## Containers, briefly
 
-A **container** packages the app with its dependencies and system libraries into an **image** that runs the same way on a laptop, in CI and in production, as long as the host has a compatible operating system kernel and CPU architecture (images can be built for several architectures, such as x86 and ARM). It is lighter than a virtual machine because containers share the host's operating system kernel. Docker is the common tool to build and run images.
+A **container** packages the app with its dependencies and system libraries into an **image** that runs the same way on a laptop, in [CI](/delivery/ci-cd/) and in production, as long as the host has a compatible operating system kernel and CPU architecture (images can be built for several architectures, such as x86 and ARM). It is lighter than a virtual machine because containers share the host's operating system kernel. Docker is the common tool to build and run images.
 
-Running many containers on many machines needs an **orchestrator**: it decides where each container runs, restarts crashed ones, scales them, rolls out new versions and routes traffic between services. **Kubernetes** is the dominant one. It is powerful and complex: a platform for building platforms. It pays off when an organization runs many services and has people to operate it; a small team usually does better with a managed platform.
+Running many containers on many machines needs an **orchestrator**: it decides where each container runs, restarts crashed ones, scales them, rolls out new versions and routes traffic between services. **[Kubernetes](/delivery/kubernetes/)** is the dominant one. It is powerful and complex: a platform for building platforms. It pays off when an organization runs many services and has people to operate it; a small team usually does better with a managed platform.
 
 ## State: what survives a restart
 
@@ -95,7 +95,7 @@ The key rule: **treat every instance as disposable.** Any instance can be stoppe
 
 ## Releasing: from commit to users
 
-**CI/CD** is the automated path from a commit to production:
+**[CI/CD](/delivery/ci-cd/)** is the automated path from a commit to production:
 
 - **CI** (continuous integration): every change is built and tested automatically, and merged often.
 - **CD** means either **continuous delivery** (every change *can* go to production; a person presses the button) or **continuous deployment** (every change that passes the checks goes to production automatically).
@@ -122,7 +122,7 @@ Whatever the strategy, two rules prevent errors during a rollout:
 Frontend platforms add two habits that are worth copying anywhere:
 
 - **Immutable deploys with their own URLs.** Each deploy is kept exactly as it was built, under its own URL, for as long as the platform's retention policy keeps it. A rollback points the domain back to an older deploy. That works if the deploy is still retained and its configuration and data are still compatible.
-- **Preview deployments.** Every pull request gets its own live URL for review.
+- **Preview deployments.** Every pull request gets its own live URL for review. Keep them out of search engines ([noindex](/web-platform/site-files/#noindex-what-search-engines-may-show)).
 
 Two problems are specific to releasing web apps:
 

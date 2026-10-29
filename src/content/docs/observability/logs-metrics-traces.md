@@ -45,7 +45,7 @@ For a frontend developer, the hard part is that most problems happen where you c
 
 Specialized signals build on these:
 
-- **Error tracking**: exceptions grouped by cause, with stack traces, the release and the affected users.
+- **[Error tracking](/observability/error-tracking/)**: exceptions grouped by cause, with stack traces, the release and the affected users.
 - **RUM** (real-user monitoring): performance and errors measured in real users' browsers.
 - **Profiles**: which functions use CPU and memory.
 
@@ -60,7 +60,7 @@ trace 4bf92f…  GET /checkout                     820 ms
 │  └─ users-service:   GET /me                    30 ms
 ```
 
-The usual investigation moves from wide to narrow: an **alert** on a metric → a **dashboard** narrows it down (which endpoint, region, release) → a **trace** of a slow or failed request → the **logs** of the guilty span.
+The usual investigation moves from wide to narrow: an **alert** on a metric → a **[dashboard](/observability/dashboards-alerting/)** narrows it down (which endpoint, region, release) → a **trace** of a slow or failed request → the **logs** of the guilty span.
 
 ## Connecting the signals
 
@@ -87,7 +87,7 @@ Measure latency with **percentiles**, not averages:
 - Percentiles can't be averaged across servers. Systems store **histograms** (counts per latency range) and compute percentiles from them.
 - Measure errors separately: a fast failing request can make latency look better.
 
-For the frontend, add Core Web Vitals from real users ([metrics](/web-platform/page-loading/#how-the-steps-map-to-metrics)), the JavaScript error rate, and API failures as the client sees them. A server that returns `200 OK` doesn't mean the page worked.
+For the frontend, add [Core Web Vitals](/observability/web-vitals/) from real users ([metrics](/web-platform/page-loading/#how-the-steps-map-to-metrics)), the JavaScript error rate, and API failures as the client sees them. A server that returns `200 OK` doesn't mean the page worked.
 
 ## SLI, SLO, SLA and error budgets
 
@@ -137,7 +137,7 @@ A reasonable minimum for a production app:
 4. **One or two SLOs** for the most important user journeys (sign-in, checkout), with alerts on them.
 5. **Distributed tracing** as soon as a request crosses more than one service, including a BFF that calls APIs.
 
-Instrument with **OpenTelemetry** where you can: one open standard for collecting all three signals, sent to any backend, so changing vendors doesn't mean changing code.
+Instrument with **[OpenTelemetry](/observability/opentelemetry/)** where you can: one open standard for collecting all three signals, sent to any backend, so changing vendors doesn't mean changing code.
 
 ## Landscape
 

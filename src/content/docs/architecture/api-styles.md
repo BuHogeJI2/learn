@@ -79,9 +79,9 @@ Writing an API is quick; changing it without breaking clients is the expensive p
 Strategies:
 
 - **Expand and contract**: add the new form, migrate clients, watch usage, and remove the old form only when nobody uses it.
-- **Versioning**: `/v2/` in the URL or a version header. This is common for public REST APIs. GraphQL usually avoids versions: the schema evolves, and old fields are marked `@deprecated` and tracked until unused.
+- **Versioning**: `/v2/` in the URL or a version header. This is common for public REST APIs. GraphQL usually avoids versions: the schema evolves, and old fields are marked [`@deprecated`](/tools/apollo/directives/#standard-directives) and tracked until unused.
 - **Tolerant readers**: clients ignore fields they don't know, so servers can add fields freely.
-- **Contract checks in CI**: tools compare the new schema with the old one and fail on breaking changes (OpenAPI diff tools, GraphQL schema registries, `buf breaking` for Protocol Buffers).
+- **Contract checks in [CI](/delivery/ci-cd/)**: tools compare the new schema with the old one and fail on breaking changes (OpenAPI diff tools, GraphQL schema registries, `buf breaking` for Protocol Buffers).
 
 ## Error boundaries
 

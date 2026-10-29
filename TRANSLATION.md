@@ -133,3 +133,28 @@ in `AGENTS.md`.
 | sync engine, inbox | same | English |
 | content model, editorial workflow, draft, preview | модель контента, редакционный процесс, черновик, превью | Russian |
 | headless, slug, page builder, DXP, visual editing | headless, slug, конструктор страниц, DXP, визуальное редактирование | English / Russian |
+| pipeline, stage, job, step, runner, agent, trigger | пайплайн, стадия, джоб, шаг, раннер, агент, триггер | Russian |
+| environment (deploy target), promotion | окружение, продвижение | Russian |
+| merge queue, flaky test | merge queue (очередь слияния), нестабильный тест (flaky) | English / Russian |
+| trunk-based development, OIDC federation, GitOps, DORA metrics, provenance | same | English |
+| lockfile | lock-файл | Russian |
+| plan, plan branches, deployment project, release, requirements, capabilities (Bamboo) | same as in Bamboo's UI | English |
+| image, layer, registry, digest, tag | образ, слой, реестр (registry), digest, тег | Russian / English |
+| namespaces, cgroups, OCI, distroless, buildpacks, multi-stage build, build secret | same | English |
+| volume | том (volume) | Russian |
+| cluster, node, Pod, control plane | кластер, нода, под, control plane | Russian / English |
+| Deployment, Service, Ingress, Gateway API, ConfigMap, Secret, StatefulSet, PersistentVolume(Claim), HPA, RBAC, reclaim policy | same (Kubernetes object names) | English |
+| reconciliation, rolling update, readiness / liveness / startup probe | same, with a short Russian meaning on first use | English |
+| requests and limits (Kubernetes) | requests и limits | English |
+| instrumentation, Collector, exporter, OTLP, semantic conventions, baggage, log bridge | инструментация; остальное — same | Russian / English |
+| context propagation | передача контекста | Russian |
+| Core Web Vitals, LCP, INP, CLS, TTFB, FCP, TBT, CrUX, soft navigation | same | English |
+| long task, field data, lab data | long task (длинная задача), полевые данные, лабораторные данные | English / Russian |
+| error tracking, issue, event, fingerprint, breadcrumbs, session replay | отслеживание ошибок, issue, событие, fingerprint, breadcrumbs, запись сессий | Russian / English |
+| incident, postmortem, incident commander, escalation, contact point, notification policy | инцидент, разбор (postmortem), руководитель инцидента, эскалация, точка контакта, политика уведомлений | Russian |
+| monorepo, polyrepo, workspaces, CODEOWNERS | монорепозиторий (monorepo), polyrepo, workspaces, CODEOWNERS | Russian / English |
+| crawl, index (search), user agent, sitemap, robots.txt, noindex, web app manifest, maskable icon, favicon | обход, индексация, user agent; остальное — same | Russian / English |
+| Suspense, boundary, fallback, transition, error boundary | Suspense, граница, fallback, transition, error boundary | English / Russian |
+| Server Components, Client Components, Server Functions, RSC payload | same | English |
+| cache ID, fetch policy, field policy, keyFields, data masking | cache ID, fetch policy, field policy, keyFields, data masking (маскирование данных) | English |
+| directive, incremental delivery | директива, частичная доставка (incremental delivery) | Russian |

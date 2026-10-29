@@ -70,7 +70,7 @@ A server-state library keeps fetched data under a **key** and decides when to fe
 Two cache designs:
 
 - **Document cache** (TanStack Query, SWR): each request result is stored under its own key, such as `['orders', 42]`. Simple and predictable. After a change, you invalidate the keys that might be affected.
-- **Normalized cache** (Apollo Client, Relay): results are split into **entities** by type and ID. If an order appears in a list and in a detail view, it is stored once, so updating it updates both views. This is more powerful, but adding or removing items from lists still needs manual work.
+- **Normalized cache** ([Apollo Client](/tools/apollo/cache/), Relay): results are split into **entities** by type and ID. If an order appears in a list and in a detail view, it is stored once, so updating it updates both views. This is more powerful, but adding or removing items from lists still needs manual work.
 
 ### Writing
 
@@ -95,7 +95,7 @@ The user who made a change must see it right away, even if other users see it a 
 
 Classic SSR still sends the data to the browser: the components hydrate there and need the same data, so it is **serialized into the HTML**. A server-state library can be seeded from it, so it doesn't fetch the data again at once, but you set this up yourself (TanStack Query's SSR guide shows how).
 
-With **Server Components**, data used only by server components **never becomes client state**. The browser receives the rendered result, and a client cache is needed only for the interactive parts. Frameworks built on them usually change how writes work too: a mutation **invalidates server caches** and refreshes the route, instead of patching a client cache. See [Next.js caching](/tools/nextjs/caching/#the-four-cache-questions-answered-by-nextjs) for one implementation.
+With **[Server Components](/tools/react/server-components/)**, data used only by server components **never becomes client state**. The browser receives the rendered result, and a client cache is needed only for the interactive parts. Frameworks built on them usually change how writes work too: a mutation **invalidates server caches** and refreshes the route, instead of patching a client cache. See [Next.js caching](/tools/nextjs/caching/#the-four-cache-questions-answered-by-nextjs) for one implementation.
 
 ## Typical failures
 

@@ -36,7 +36,7 @@ As a product grows, more people work on more code. Questions appear that code st
 A boundary can exist at three levels, and they can be chosen separately:
 
 1. **Code boundary** (module): which code may call which. Enforced by the language and tooling. Cheap to move.
-2. **Deployment boundary** (deployable unit): what ships, scales and fails together. Each unit has its own pipeline, version and runtime ([deployment models](/delivery/deployment-models/)).
+2. **Deployment boundary** (deployable unit): what ships, scales and fails together. Each unit has its own [pipeline](/delivery/ci-cd/), version and runtime ([deployment models](/delivery/deployment-models/)).
 3. **Data boundary**: who owns which tables. Other parts use the owner's API, not its database.
 
 Above them sits **ownership**: which team is responsible. **Conway's law** says systems end up mirroring the communication structure of the organization that builds them, so team boundaries and system boundaries pull toward each other.
@@ -86,7 +86,7 @@ Costs:
 
 The worst case is a **distributed monolith**: services that must be deployed together, or that read and write each other's tables. You pay the costs of both styles and get the benefits of neither.
 
-Note that **[serverless functions](/delivery/deployment-models/)** (code that the platform starts on demand, with no server running all the time) **are a deployment model, not an architecture**: a monolith can run as functions, and a service can run in a container.
+Note that **[serverless functions](/delivery/deployment-models/)** (code that the platform starts on demand, with no server running all the time) **are a deployment model, not an architecture**: a monolith can run as functions, and a service can run in a [container](/delivery/containers/).
 
 ## Where the frontend fits: BFF, gateway, micro-frontends
 

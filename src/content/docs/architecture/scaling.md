@@ -160,7 +160,7 @@ Plan headroom for peaks, and load-test before big events.
 ## Landscape
 
 - **Load balancers:** Nginx, HAProxy, Envoy, Traefik; cloud load balancers (AWS ALB and NLB, Google Cloud Load Balancing, Azure Front Door), Cloudflare Load Balancing.
-- **Autoscaling:** Kubernetes Horizontal Pod Autoscaler, KEDA (scaling by queue length and other events), cloud autoscaling groups; serverless platforms scale on their own.
+- **Autoscaling:** [Kubernetes](/delivery/kubernetes/) Horizontal Pod Autoscaler, KEDA (scaling by queue length and other events), cloud autoscaling groups; serverless platforms scale on their own.
 - **Data:** Redis and Valkey, Memcached, read replicas in managed databases, connection poolers (PgBouncer, Amazon RDS Proxy, Supavisor), sharding layers (Vitess for MySQL, Citus for PostgreSQL).
 - **Load testing:** k6, Gatling, Locust, Apache JMeter, Artillery.
 - **Learning:** the System Design Primer.

@@ -52,7 +52,7 @@ description: Путь от введённого URL до пикселей на �
 | **CLS** (Cumulative Layout Shift) | Насколько сильно прыгает контент | 6 |
 | **INP** (Interaction to Next Paint) | Как быстро страница реагирует на ввод | 7 |
 
-Три выделенные метрики — это **Core Web Vitals**, по которым Google оценивает опыт реальных пользователей.
+Три выделенные метрики — это **[Core Web Vitals](/ru/observability/web-vitals/)**, по которым Google оценивает опыт реальных пользователей.
 
 ## Читаем вкладку Network
 

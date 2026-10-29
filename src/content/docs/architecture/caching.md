@@ -128,7 +128,7 @@ A good order of thinking: first make the response cacheable by HTTP (free and st
 
 ## Landscape
 
-- **Browser:** the HTTP cache (built in), the Cache API with Service Workers, client data libraries (Apollo Client, TanStack Query, SWR, RTK Query).
+- **Browser:** the HTTP cache (built in), the Cache API with Service Workers, client data libraries ([Apollo Client](/tools/apollo/cache/), TanStack Query, SWR, RTK Query).
 - **CDN / edge:** Cloudflare, Fastly, Akamai, Amazon CloudFront, the Vercel and Netlify edge networks.
 - **Reverse proxies:** Varnish, Nginx `proxy_cache`.
 - **Application caches:** Redis and Valkey, Memcached, in-process LRU caches (they drop the least recently used entries first); framework caches such as the [Next.js `use cache` directive](/tools/nextjs/caching/).

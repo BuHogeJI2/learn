@@ -142,7 +142,7 @@ latency
 ## Ландшафт
 
 - **Балансировщики нагрузки:** Nginx, HAProxy, Envoy, Traefik; облачные балансировщики (AWS ALB и NLB, Google Cloud Load Balancing, Azure Front Door), Cloudflare Load Balancing.
-- **Автомасштабирование:** Kubernetes Horizontal Pod Autoscaler, KEDA (масштабирование по длине очереди и другим событиям), облачные группы автомасштабирования; serverless-платформы масштабируются сами.
+- **Автомасштабирование:** [Kubernetes](/ru/delivery/kubernetes/) Horizontal Pod Autoscaler, KEDA (масштабирование по длине очереди и другим событиям), облачные группы автомасштабирования; serverless-платформы масштабируются сами.
 - **Данные:** Redis и Valkey, Memcached, реплики для чтения в управляемых базах, пулеры соединений (PgBouncer, Amazon RDS Proxy, Supavisor), слои шардинга (Vitess для MySQL, Citus для PostgreSQL).
 - **Нагрузочное тестирование:** k6, Gatling, Locust, Apache JMeter, Artillery.
 - **Для изучения:** System Design Primer.

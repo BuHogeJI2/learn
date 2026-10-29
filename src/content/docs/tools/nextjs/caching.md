@@ -33,7 +33,7 @@ At build time, Next.js renders each route and sorts every part of the tree into 
 
 - **Static**: pure code, imports, synchronous reads. These are prerendered automatically.
 - **Cached**: async work marked with `'use cache'`. It is prerendered too, as long as its lifetime isn't too short.
-- **Request-time**: uncached fetches, `cookies()`, `headers()`, `searchParams`, unknown `params`. These **must** sit inside `<Suspense>`. Their fallback goes into the prerendered page and the real content streams in per request.
+- **Request-time**: uncached fetches, `cookies()`, `headers()`, `searchParams`, unknown `params`. These **must** sit inside [`<Suspense>`](/tools/react/suspense/). Their fallback goes into the prerendered page and the real content streams in per request.
 
 Static and cached parts form the **static shell**, which a [CDN](/web-platform/cdn/) can serve instantly. This is **Partial Prerendering (PPR)**: one page, partly static, partly [streamed](/architecture/rendering/#streaming).
 

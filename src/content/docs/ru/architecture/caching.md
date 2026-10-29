@@ -117,7 +117,7 @@ description: Где можно хранить результат между ба
 
 ## Ландшафт
 
-- **Браузер:** HTTP-кэш (встроенный), Cache API вместе с Service Workers, клиентские библиотеки данных (Apollo Client, TanStack Query, SWR, RTK Query).
+- **Браузер:** HTTP-кэш (встроенный), Cache API вместе с Service Workers, клиентские библиотеки данных ([Apollo Client](/ru/tools/apollo/cache/), TanStack Query, SWR, RTK Query).
 - **CDN / edge:** Cloudflare, Fastly, Akamai, Amazon CloudFront, edge-сети Vercel и Netlify.
 - **Reverse proxy:** Varnish, Nginx `proxy_cache`.
 - **Кэши приложения:** Redis и Valkey, Memcached, LRU-кэши внутри процесса (первыми удаляют записи, которые дольше всех не использовались); кэши фреймворков, например [директива `use cache` в Next.js](/ru/tools/nextjs/caching/).

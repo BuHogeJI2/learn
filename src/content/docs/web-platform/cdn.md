@@ -59,7 +59,7 @@ Code can run in three kinds of places:
 
 | Place | Close to | Typical runtime |
 | --- | --- | --- |
-| **Origin region** | Your database | Full Node.js, containers, [serverless functions](/delivery/deployment-models/) (started on demand, with no server running all the time) in one region |
+| **Origin region** | Your database | Full Node.js, [containers](/delivery/containers/), [serverless functions](/delivery/deployment-models/) (started on demand, with no server running all the time) in one region |
 | **Edge** (every PoP) | The user | Lightweight isolates: start in milliseconds, limited APIs, short CPU time |
 | **Several regions** | Users and regional data replicas | Same as origin, deployed multiple times |
 
