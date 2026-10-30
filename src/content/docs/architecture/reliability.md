@@ -72,7 +72,7 @@ The rules:
 - **Jitter**: add randomness to each wait. Otherwise thousands of clients that failed at the same moment retry at the same moment too, and hit the recovering service together.
 - **Respect `Retry-After`** when the server sends it.
 - **Retry at one layer only.** If the browser, the [BFF](/architecture/application-boundaries/#where-the-frontend-fits-bff-gateway-micro-frontends) (the frontend's own server layer), a service and the database driver each make three attempts (the original plus two retries), one failure can become 3 × 3 × 3 × 3 = 81 calls to the database.
-- **Use a retry budget**: for example, retries may add at most 10% to the normal number of requests. When a dependency is truly down, retries stop instead of piling up.
+- **Use a retry budget**: for example, retries may add at most 10% to the normal number of requests. Once the budget is used up, further retries are skipped, so a failing dependency gets bounded extra load instead of a pile-up. (Reacting to the dependency's health is the job of a circuit breaker, below.)
 - **Repeat only what is safe to repeat**: see the next section.
 
 ## Idempotency: making "again" safe
@@ -126,7 +126,7 @@ In the frontend, the same ideas look like error boundaries (components that catc
 - **Retry storms**: retries at every layer, without backoff or jitter.
 - **Retrying non-idempotent operations**: double charges, duplicate orders.
 - **An inner timeout longer than the outer one.**
-- **A health check that tests shared dependencies.** The database blips, every instance reports unhealthy, and the load balancer removes them all, or the orchestrator restarts them all. A **liveness** check (which usually triggers restarts) should only test that the process itself works. A **readiness** check (which decides routing) should find problems of *this* instance: if it also fails on a shared outage, every instance fails it at once. Decide on purpose what the whole fleet does when a shared dependency is down, such as serving degraded pages.
+- **A health check that tests shared dependencies.** The database blips, every instance reports unhealthy, and the load balancer removes them all, or the orchestrator restarts them all. A **liveness** check (which usually triggers restarts) should only test that the process itself works. A **readiness** check (which decides routing) asks whether this instance can serve useful requests, mostly problems of *this* instance. If it also fails on a shared outage, every instance fails it at once; include a dependency only when the instance can serve nothing useful without it. Decide on purpose what the whole fleet does when a shared dependency is down, such as serving degraded pages.
 - **Unbounded queues and pools** that hide overload until memory runs out.
 - **Rate limits by IP address only.** Whole offices and mobile networks share one IP; limit by user or key where you can.
 - **Treating a timeout as a definite failure.** The UI says "Order failed", the user orders again, and the first order did go through. Show "checking the status" and ask the server.

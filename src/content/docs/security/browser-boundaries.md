@@ -123,7 +123,7 @@ Remember that `SameSite` works with **sites**: `blog.shop.example` is same-site 
 - **Reflecting any `Origin` with `Allow-Credentials: true`.** The server copies whatever origin asks into `Access-Control-Allow-Origin`. Now every site on the internet can read your logged-in users' data.
 - **Weak allowlist checks.** `origin.endsWith("shop.example")` also matches `evilshop.example`. Compare full origins from a fixed list.
 - **Allowing the `null` origin.** Sandboxed iframes and local files send `Origin: null`, and an attacker can produce it on purpose.
-- **Forgetting `Vary: Origin`** when the allowed origin changes per request. A CDN caches the header for the first origin and serves it to all ([`Vary`](/architecture/caching/#http-caching-the-shared-language)).
+- **Forgetting `Vary: Origin`** when the allowed origin changes per request. A CDN caches the header for the first origin and serves it to all ([`Vary`](/architecture/caching/#http-caching-the-shared-language)). Some CDNs ignore `Vary` unless configured, so also check that the CDN's cache key includes `Origin`.
 - **Treating CORS as protection.** "Only our frontend can call this API" is false; anyone can call it outside a browser.
 - **A wide `Domain` cookie** shared with every subdomain, including ones run by third parties.
 - **`postMessage` without an origin check**, or sending secrets with target `'*'`.

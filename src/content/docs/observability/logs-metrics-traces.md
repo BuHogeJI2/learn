@@ -110,7 +110,7 @@ For intuition, here is what a **time-based** availability target allows over a 3
 
 ## Alerts that people act on
 
-- **Alert on symptoms users feel** (error rate, latency against the SLO), not on every possible cause ("CPU at 80%"). Causes belong on dashboards, where you look during an investigation.
+- **Alert on symptoms users feel** (error rate, latency against the SLO), not on every possible cause ("CPU at 80%"). Causes belong on dashboards, where you look during an investigation. The exception is a cause that predicts real damage and needs action, such as a disk that will be full in four hours ([alerting](/observability/dashboards-alerting/#alerting-rules-routing-silences)).
 - **Burn-rate alerts.** Page someone when the error budget burns fast (for example, 2% of the monthly budget in one hour), and open a ticket when it burns slowly. Check a short window together with the long one, so the alert stops once the problem is over. In low-traffic services, one failed request can look like a huge burn; use synthetic checks (scripted requests sent on a schedule) or looser thresholds there.
 - **Every page must be urgent, actionable and documented** with a runbook (the steps to diagnose and fix). If the right response to an alert is "ignore it", delete the alert.
 - **Alert fatigue** is a real failure mode: too many noisy alerts, and the important one is ignored.

@@ -120,7 +120,7 @@ Every site, installable or not, also needs **favicons** (the icons in browser ta
 - **Any company site:** `security.txt`.
 - **Documentation and content that AI tools should read well:** consider `llms.txt`, knowing it is a proposal.
 
-Frameworks generate most of these from code: Next.js has `sitemap`, `robots` and `manifest` files in the `app` directory, and Astro has a sitemap integration. (This book will publish its sitemap once its final domain is configured.)
+Frameworks generate most of these from code: Next.js has `sitemap`, `robots` and `manifest` files in the `app` directory, and Astro has a sitemap integration. (This book uses the Astro integration: its sitemap is at `/sitemap-index.xml`, linked from its `robots.txt`.)
 
 ## Landscape
 

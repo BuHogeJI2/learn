@@ -45,7 +45,7 @@ Data libraries plug in through these mechanisms: TanStack Query and Apollo Clien
 
 - **Components under the same closest boundary appear together.** Nest boundaries to define a loading sequence: page shell → main content → comments.
 - **Where you put a boundary is what the user sees while waiting.** Too high, and the whole page becomes one spinner; too fine-grained, and pieces pop in one by one and shift the layout ([CLS](/observability/web-vitals/#cls-how-stable-the-layout-is), layout shift). Make fallbacks the same size as the content they replace.
-- React reveals suspended content **at most once every 300 ms**, so boundaries that become ready close together appear together.
+- React **throttles** how often it reveals suspended content (an internal heuristic, currently around 300 ms in many cases), so boundaries that become ready close together often appear together. Don't build on the exact number.
 
 ## Updates: transitions keep what is already shown
 

@@ -3,7 +3,7 @@ title: Next.js caching (Cache Components)
 description: How Next.js 16 decides what is prerendered, what is cached and what streams per request.
 concept: architecture/caching
 verified:
-  date: 2026-10-29
+  date: 2026-10-30
   versions:
     next: 16.4.3
 officialDocs:
@@ -21,13 +21,15 @@ officialDocs:
     url: https://nextjs.org/docs/app/api-reference/directives/use-cache-remote
   - title: use cache - private
     url: https://nextjs.org/docs/app/api-reference/directives/use-cache-private
+  - title: Prefetching with Cache Components
+    url: https://nextjs.org/docs/app/getting-started/caching#prefetching
   - title: Caching without Cache Components (previous model)
     url: https://nextjs.org/docs/app/guides/caching-without-cache-components
 ---
 
 ## The model in short
 
-With **Cache Components** (`cacheComponents: true`, on by default in new apps), **nothing is cached unless you ask for it**. You opt in with the `'use cache'` directive.
+With **Cache Components** (`cacheComponents: true`), **no data or async work is cached unless you ask for it** (static parts are still prerendered automatically, see below). New apps created with the recommended `create-next-app` defaults have it enabled together with **Partial Prefetching** (`partialPrefetching: true`, see [prefetching](#where-cached-results-live)); existing apps turn both options on in the Next config. You opt in with the `'use cache'` directive.
 
 At build time, Next.js renders each route and sorts every part of the tree into one of three kinds:
 
@@ -37,7 +39,7 @@ At build time, Next.js renders each route and sorts every part of the tree into 
 
 Static and cached parts form the **static shell**, which a [CDN](/web-platform/cdn/) can serve instantly. This is **Partial Prerendering (PPR)**: one page, partly static, partly [streamed](/architecture/rendering/#streaming).
 
-The **previous model** (Next.js 13–15, still used when the flag is off) cached a lot implicitly: `fetch` results and whole routes, controlled by route segment options like `dynamic` and `revalidate`. It was hard to predict. The new model is explicit.
+The **previous model** (still used when the flag is off) was controlled by route segment options like `dynamic` and `revalidate`, and its defaults changed between versions. In Next.js 13 and 14 it cached a lot implicitly: `fetch` results, `GET` Route Handlers and whole routes. Next.js 15 made `fetch` and `GET` Route Handlers uncached by default (you opt in, for example with `cache: 'force-cache'`), and the client router stopped reusing page segments on ordinary link navigation (Back and Forward, shared layouts and loading states still reuse them). So an older app's behavior depends on its version. It was hard to predict; the new model is explicit.
 
 ## The four cache questions, answered by Next.js
 
@@ -60,6 +62,8 @@ Built-in `cacheLife` profiles: `seconds`, `minutes`, `hours`, `days`, `weeks`, `
 1. **Prerendered HTML**: on disk or in the platform's storage behind a CDN. This is the static shell, rebuilt according to `revalidate` and `expire`.
 2. **Server store**: by default **in memory, per instance**. On [serverless](/delivery/deployment-models/) platforms (each request may run on a new, short-lived instance), instances are short-lived, so runtime entries are often lost between requests. `'use cache: remote'` moves entries to a shared, durable cache handler (for example Redis or a platform KV), at the cost of a network round trip and platform fees.
 3. **Browser**: the client router keeps results for their `stale` time, with a minimum of 30 seconds.
+
+**Prefetching** fills the browser store before a click. With Partial Prefetching, the router prefetches the shell of each linked route by default. With `<Link prefetch={true}>`, it also renders the route for that link's URL on the server and prefetches cached content that depends on the URL (`searchParams`, `params`), including `'use cache'` results computed from runtime values and `'use cache: private'` results. This is why a navigation can be instant even when runtime entries in the server store rarely survive between requests: the cache lifetime lets a result join the prefetch, and the browser treats it as fresh for its `stale` time. The cost: one server invocation per prefetched link.
 
 All three are scoped to **one deployment**: the build ID is part of the key, so every deploy starts with a cold cache.
 
