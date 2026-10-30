@@ -158,3 +158,10 @@ in `AGENTS.md`.
 | Server Components, Client Components, Server Functions, RSC payload | same | English |
 | cache ID, fetch policy, field policy, keyFields, data masking | cache ID, fetch policy, field policy, keyFields, data masking (маскирование данных) | English |
 | directive, incremental delivery | директива, частичная доставка (incremental delivery) | Russian |
+| domain sharding, opaque response | domain sharding, непрозрачный ответ (opaque response) | English / Russian |
+| facade (loading a widget on demand), redirect loop | фасад, цикл редиректов | Russian |
+| chatty (API), expand and contract, persisted queries, peer dependency | same, with a short Russian meaning on first use | English |
+| debounce, smoke test, read model, tag manager, dead man's switch | debounce, smoke-набор, read model, tag manager, dead man's switch | English |
+| stored XSS, step-up (authentication) | stored XSS (хранимая XSS), дополнительная проверка (step-up) | English / Russian |
+| connection pooler, remote cache, incremental handler | пул соединений, удалённый кэш, обработчик частичной доставки (each with the English term in brackets on first use) | Russian |
+| reconciliation (of data after failures), reconnect storm | сверка, шторм переподключений | Russian (the Kubernetes control-loop term stays English) |

@@ -13,10 +13,10 @@ An online shop's product page shows a product description (edited a few times a 
 <details>
 <summary>Answer</summary>
 
-Split the page by **freshness** and **scope**:
+Split the page by **freshness** (how stale it may be) and **scope** (who may see it), two of the [four cache questions](/architecture/caching/#mental-model-four-questions-for-every-cache):
 
-- **Description**: shared, rarely changes. Cache for a long time at the CDN or server level and invalidate on edit (a tag like `product:42` purged by a [CMS](/data/cms/) or admin webhook).
-- **Price**: shared, changes often. Use a short TTL with stale-while-revalidate, or a separate small request with its own short lifetime. Don't let the price dictate the lifetime of the whole page.
+- **Description**: shared, rarely changes. Cache for a long time at the [CDN](/web-platform/cdn/) (servers near users that keep copies) or server level and invalidate on edit (a tag like `product:42` purged by a webhook, an HTTP callback that the [CMS](/data/cms/), the editors' content system, or the admin panel sends on publish).
+- **Price**: shared, changes often. Use a short TTL (how long a cached copy lives) with stale-while-revalidate (serve the old copy while a fresh one is fetched in the background), or a separate small request with its own short lifetime. Don't let the price dictate the lifetime of the whole page.
 - **Cart**: personal. Never put it in a shared cache. Fetch it per user (`Cache-Control: private` or `no-store`), or keep it in client state.
 
 The key idea: if you cache them as one response, the strictest part (the cart) forces the whole page to be uncacheable.
@@ -85,9 +85,12 @@ Content comes from a [CMS](/data/cms/). Editors want changes live within a minut
 <details>
 <summary>Answer</summary>
 
-Don't set a 60-second TTL everywhere. That refreshes thousands of entries that didn't change and still gives up to 60 seconds of staleness.
+Two workable strategies, with different behavior when something fails:
 
-Instead, use **long-lived caching plus event-based invalidation**: cache content for a long time (with tags), and have the CMS call a **publish webhook** that purges the affected tags. Fresh content appears within seconds, and unchanged content is never refetched. Keep a long TTL as a safety net in case a webhook is lost.
+- **Long-lived caching plus event-based invalidation**: cache content for a long time (with tags), and have the CMS call a **publish webhook** that purges the affected tags. When the webhook works, fresh content appears within seconds and unchanged content is never refetched. But webhooks can be lost, so the minute holds only with retries, alerts on failed deliveries and a reconciliation job that runs every minute (it compares what was published recently with what was purged, and purges what is missing). If all of that fails, the cache lifetime sets the worst case.
+- **A short time-based lifetime that fits the budget**: for example `s-maxage=30, stale-while-revalidate=30` at the CDN, so no visitor gets a copy older than about a minute (after the stale window, the CDN must wait for a fresh copy). Simple, and it heals itself: an entry is refreshed only when it is requested after it went stale, not all at once. The cost: more requests to the origin.
+
+Many sites combine them: event-based invalidation for speed, and a bounded lifetime as the guarantee. Count every layer: browser, CDN and server caches each add their own lifetime, so "within a minute" must hold for their sum.
 
 </details>
 
