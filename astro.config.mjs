@@ -14,6 +14,7 @@ function domain(label, ru, directory) {
 }
 
 export default defineConfig({
+	site: 'https://learn.buhogeji.me',
 	integrations: [
 		starlight({
 			title: 'Learn Book',
