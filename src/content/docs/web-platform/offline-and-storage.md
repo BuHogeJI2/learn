@@ -116,7 +116,7 @@ The questions this raises are the ones from [reliability](/architecture/reliabil
 - **Conflicts.** Two devices changed the same record while offline. Choose: last write wins (simple, and it silently loses data), a [version check](/architecture/state/#concurrent-changes) that shows the conflict to the user, or merging with CRDTs (data types that merge automatically).
 - **Rejection.** The server refuses a change the user saw as done hours ago: the item is sold out, the permission is gone. The UI needs a place to show this.
 - **Order.** Changes that depend on each other must be sent in order; one failed change can block those behind it.
-- **Permissions and identity.** The user may be logged out or removed while offline, and the local data of the previous user must not remain for the next one. The same goes for the queue: tie each queued change to the user and tenant who made it, or user A's edits get sent with user B's credentials. The server still checks permissions on every change.
+- **Permissions and identity.** The user may be logged out or removed while offline, and the local data of the previous user must not remain for the next one. The same goes for the queue: tie each queued change to the user and tenant (the customer organization) that made it, or user A's edits get sent with user B's credentials. The server still checks permissions on every change.
 - **Schema.** Local data outlives app versions. IndexedDB has its own [migrations](/data/schema-evolution/), which run on every user's device.
 - **Sending.** The **Background Sync** API can send the outbox after the page is closed, but it works only in Chromium browsers. Always also send when the app is open and the connection returns.
 
