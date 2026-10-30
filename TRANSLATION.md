@@ -165,3 +165,6 @@ in `AGENTS.md`.
 | stored XSS, step-up (authentication) | stored XSS (хранимая XSS), дополнительная проверка (step-up) | English / Russian |
 | connection pooler, remote cache, incremental handler | пул соединений, удалённый кэш, обработчик частичной доставки (each with the English term in brackets on first use) | Russian |
 | reconciliation (of data after failures), reconnect storm | сверка, шторм переподключений | Russian (the Kubernetes control-loop term stays English) |
+| accessibility, assistive technology | доступность, вспомогательные технологии | Russian |
+| event loop, system design, RPO, RTO | same | English |
+| disaster recovery, schema evolution | аварийное восстановление, эволюция схемы | Russian |
