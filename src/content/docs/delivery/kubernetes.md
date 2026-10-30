@@ -71,7 +71,7 @@ user ─► cloud load balancer ─► Ingress / Gateway ─► Service ─► o
 This is a conceptual route. These are configuration objects, implemented by controllers and the network, and an ingress controller often sends traffic straight to the Pods.
 
 - **Pods are disposable.** A recreated Pod gets a new IP address, so normal clients use a Service name, not Pod addresses.
-- A **Service** gives a group of Pods a stable DNS name and address and spreads new connections across the Pods that are ready. It balances connections, not individual HTTP requests: a keep-alive, HTTP/2 or WebSocket connection stays on one Pod.
+- A **Service** gives a group of Pods a stable [DNS](/web-platform/dns/) name and address and spreads new connections across the Pods that are ready. It balances connections, not individual HTTP requests: a keep-alive, HTTP/2 or WebSocket connection stays on one Pod.
 - **Ingress**, and its newer, more expressive successor the **Gateway API**, route HTTP traffic from outside the cluster to Services by host name and path, and terminate TLS. They need a controller that implements them (an NGINX- or Envoy-based one, or the cloud's [load balancer](/architecture/scaling/#load-balancing)).
 
 ## The rest of the everyday objects
@@ -86,7 +86,7 @@ This is a conceptual route. These are configuration objects, implemented by cont
 
 ## Storage: Pods are disposable, data is not
 
-A Pod's own filesystem is lost when the Pod is replaced. Data that must survive uses a **PersistentVolumeClaim** (a request for storage), which Kubernetes binds to a **PersistentVolume**, usually a disk from the cloud provider. The volume survives Pod restarts and can follow the Pod to another node, within the limits of where that disk can be attached (often one availability zone; local disks can't move at all). Its storage class and **reclaim policy** decide what happens on cleanup: with the common `Delete` policy, deleting the claim also deletes the disk. A persistent volume is not a backup.
+A Pod's own filesystem is lost when the Pod is replaced. Data that must survive uses a **PersistentVolumeClaim** (a request for storage), which Kubernetes binds to a **PersistentVolume**, usually a disk from the cloud provider. The volume survives Pod restarts and can follow the Pod to another node, within the limits of where that disk can be attached (often one availability zone; local disks can't move at all). Its storage class and **reclaim policy** decide what happens on cleanup: with the common `Delete` policy, deleting the claim also deletes the disk. A persistent volume is not a [backup](/delivery/disaster-recovery/#replication-is-not-a-backup).
 
 Running databases inside Kubernetes is possible (a **StatefulSet** gives Pods stable names and their own volumes), but it is serious operational work: backups, upgrades, failover. Many teams keep stateless apps in Kubernetes and use a managed database outside the cluster ([what survives a restart](/delivery/deployment-models/#state-what-survives-a-restart)).
 

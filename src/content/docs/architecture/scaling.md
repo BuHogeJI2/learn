@@ -95,7 +95,7 @@ A **load balancer** receives all requests and spreads them across instances:
 
 **Sticky sessions** (sending a user to the same instance every time) are a workaround for state kept in memory. They make load uneven and lose the user's state when that instance dies. Prefer stateless servers.
 
-Balancing happens at several levels: DNS or anycast spreads users across regions ([how users reach a PoP](/web-platform/cdn/#mental-model-a-reverse-proxy-in-front-of-everything)), a load balancer spreads requests inside a region, and services balance calls to each other.
+Balancing happens at several levels: [DNS](/web-platform/dns/) or anycast spreads users across regions ([how users reach a PoP](/web-platform/cdn/#mental-model-a-reverse-proxy-in-front-of-everything)), a load balancer spreads requests inside a region, and services balance calls to each other.
 
 ## Stateless servers, state elsewhere
 

@@ -8,12 +8,12 @@ This is a project I write for myself. It is public, so feel free to read it, but
 
 ## What's inside
 
-- **Web platform**: HTTP and HTTPS, how a browser loads a page, CDNs, sitemaps and other site files.
+- **Web platform**: HTTP and HTTPS, DNS, how a browser loads a page and runs code, CDNs, accessibility, offline and browser storage, sitemaps and other site files.
 - **Security**: browser boundaries and CORS, web attacks, authentication and authorization.
-- **Architecture**: caching, rendering strategies, state, API styles, application boundaries, scaling, reliability, background jobs, real-time delivery, repository layout.
-- **Data**: database types, consistency and transactions, CMS.
+- **Architecture**: caching, rendering strategies, state, API styles, application boundaries, scaling, reliability, background jobs, real-time delivery, repository layout, testing strategy.
+- **Data**: database types, consistency and transactions, schema evolution, CMS.
 - **Observability**: logs, metrics and traces, OpenTelemetry, Web Vitals, error tracking, dashboards and alerting.
-- **Delivery**: deployment models, CI/CD, containers, Kubernetes.
+- **Delivery**: deployment models, CI/CD, containers, Kubernetes, disaster recovery.
 - **Tools**: how specific tools implement the concepts (Next.js caching, React Suspense and Server Components, the Apollo Client cache and directives), each checked against a stated version.
 
 Pages link to each other where one concept builds on another, and some topics have an optional quiz.

@@ -43,7 +43,7 @@ Values between "good" and "poor" are "needs improvement". Two rules decide the v
 - **The 75th percentile**: for each metric separately, take the value that 75% of measured visits match or beat; that value must be in the "good" range. A page passes the Core Web Vitals assessment when all three metrics pass.
 - **Mobile and desktop are judged separately**, because devices and networks differ so much.
 
-Two more metrics help to **diagnose** LCP: **TTFB** (time to first byte, good ≤ 0.8 s) and **FCP** (first contentful paint, good ≤ 1.8 s). A lab test that only loads the page has no interactions, so tools such as Lighthouse use **TBT** (Total Blocking Time: the total time during loading when long tasks blocked the main thread) as a stand-in for INP. A lab test that performs interactions, in DevTools or a scripted flow, can measure INP directly.
+Two more metrics help to **diagnose** LCP: **TTFB** (time to first byte, good ≤ 0.8 s) and **FCP** (first contentful paint, good ≤ 1.8 s). A lab test that only loads the page has no interactions, so tools such as Lighthouse use **TBT** (Total Blocking Time: the total time during loading when [long tasks](/web-platform/browser-execution/#long-tasks-and-what-users-feel) blocked the main thread) as a stand-in for INP. A lab test that performs interactions, in DevTools or a scripted flow, can measure INP directly.
 
 INP replaced the older FID (First Input Delay) in March 2024. FID measured only the waiting time before the *first* interaction; INP covers every click, tap and key press (not scrolling or hovering) and the whole time until the screen updates; a visit without such interactions has no INP value.
 

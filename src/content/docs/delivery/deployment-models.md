@@ -112,7 +112,7 @@ How a new version reaches users:
 | **Canary** | Send a small share of traffic to the new version, watch error rates and latency ([monitoring](/observability/logs-metrics-traces/)), then increase | Stop the canary |
 | **Feature flags** | Deploy the code switched off, then turn it on for chosen users | Turn the flag off, no deploy; what the feature already did stays |
 
-A rollback switches **code**, not **data**. Database changes, sent messages and charged cards stay. Keep the schema and data compatible with the previous version for as long as you might roll back.
+A rollback switches **code**, not **data**. Database changes, sent messages and charged cards stay. Keep the [schema and data](/data/schema-evolution/) compatible with the previous version for as long as you might roll back.
 
 Whatever the strategy, two rules prevent errors during a rollout:
 

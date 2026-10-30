@@ -161,10 +161,25 @@ in `AGENTS.md`.
 | domain sharding, opaque response | domain sharding, непрозрачный ответ (opaque response) | English / Russian |
 | facade (loading a widget on demand), redirect loop | фасад, цикл редиректов | Russian |
 | chatty (API), expand and contract, persisted queries, peer dependency | same, with a short Russian meaning on first use | English |
-| debounce, smoke test, read model, tag manager, dead man's switch | debounce, smoke-набор, read model, tag manager, dead man's switch | English |
+| debounce, smoke suite, read model, tag manager, dead man's switch | debounce, smoke-набор, read model, tag manager, dead man's switch | English |
 | stored XSS, step-up (authentication) | stored XSS (хранимая XSS), дополнительная проверка (step-up) | English / Russian |
 | connection pooler, remote cache, incremental handler | пул соединений, удалённый кэш, обработчик частичной доставки (each with the English term in brackets on first use) | Russian |
 | reconciliation (of data after failures), reconnect storm | сверка, шторм переподключений | Russian (the Kubernetes control-loop term stays English) |
 | accessibility, assistive technology | доступность, вспомогательные технологии | Russian |
-| event loop, system design, RPO, RTO | same | English |
+| system design, RPO, RTO | same | English |
 | disaster recovery, schema evolution | аварийное восстановление, эволюция схемы | Russian |
+| test double, stub, mock, snapshot | тестовый двойник (test double), стаб, мок, снапшот | Russian |
+| unit, component, integration, contract, end-to-end, smoke test | юнит-, компонентный, интеграционный, контрактный, end-to-end, smoke-тест | Russian / English |
+| mutation testing, test pyramid, testing trophy | мутационное тестирование, пирамида тестов, трофей тестирования | Russian |
+| screen reader, accessibility tree, accessible name, landmark, live region | скринридер, дерево доступности, доступное имя, ориентир (landmark), живая область (live region) | Russian |
+| WCAG, ARIA, inert, `:focus-visible` | same | English |
+| focus | фокус | Russian |
+| event loop, task, microtask, yield, compositor, layout thrashing, forced layout | event loop (цикл событий), задача, микрозадача, уступать, компоновщик (compositor), layout thrashing, принудительная раскладка | English / Russian |
+| web worker, structured clone | same | English |
+| best-effort, eviction, persistent storage, OPFS | best-effort, вытеснение, постоянное хранилище, OPFS | English / Russian |
+| service worker, cache first, network first, outbox, CRDT | same | English |
+| registrar, authoritative DNS, recursive resolver, apex, propagation, negative caching | регистратор, авторитативный DNS, рекурсивный резолвер, apex, распространение (propagation), негативное кэширование | Russian / English |
+| subdomain takeover, dangling CNAME, flattening | subdomain takeover (захват поддомена), висячий CNAME, flattening | English / Russian |
+| backfill, migration, lock queue | заполнение данных (backfill), миграция, очередь блокировок | Russian |
+| point-in-time recovery, pilot light, warm standby, active/active, split brain, game day | same | English |
+| backup, restore, failover | бэкап, восстановление, переключение при сбое (failover) | Russian |

@@ -74,7 +74,7 @@ A separate choice is **hosted or self-hosted**: Contentful, Sanity and Storyblok
 - **Blocks and page builders.** Editors compose pages from predefined components (hero, grid, call to action). This gives them freedom, but mixes layout with content. Keep the set of blocks small and owned by developers.
 - **Localization**: translate per field or per entry, and decide what happens when a translation is missing.
 - **Media**: serve images through an image service that resizes and converts them ([CDN](/web-platform/cdn/#what-a-cdn-does-besides-caching)).
-- **Schema changes are migrations.** Renaming a field means changing thousands of entries. Some CMSs define the content model in code (Sanity, Payload, Strapi), so it is versioned and reviewed together with the app.
+- **Schema changes are [migrations](/data/schema-evolution/).** Renaming a field means changing thousands of entries. Some CMSs define the content model in code (Sanity, Payload, Strapi), so it is versioned and reviewed together with the app.
 
 ## Drafts, preview and publishing
 

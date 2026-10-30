@@ -61,7 +61,7 @@ Four principles make pipelines trustworthy:
 
 1. **Build once, promote the same artifact.** The thing that reaches production is exactly the thing that was tested; only configuration differs per environment. That works only if those differences are really read at runtime: public variables in frontend bundles are baked in at build time ([configuration](/delivery/deployment-models/#mental-model-the-build-output-decides-the-runtime)). If the framework needs a separate build per environment, test that exact build.
 2. **Pipeline as code.** The pipeline definition lives in the repository, is reviewed like code and versioned with it.
-3. **Fast feedback first.** Cheap checks (lint, types, unit tests) run first and fail early; slow ones (end-to-end tests) run later or in parallel.
+3. **Fast feedback first.** Cheap checks (lint, types, [unit tests](/architecture/testing/#test-types-and-what-they-prove)) run first and fail early; slow ones (end-to-end tests, which drive the whole app through a browser) run later or in parallel.
 4. **Reproducible builds.** Pinned tool versions, lockfiles (files that record the exact version of every dependency), clean machines for every run.
 
 ## The same ideas in different tools

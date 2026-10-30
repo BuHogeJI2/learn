@@ -72,6 +72,6 @@ You have two projects: a marketing site for a conference, and an internal dashbo
 
 The **dashboard**. People return to it daily, so being able to install it with its own icon, name and window (`display: standalone`) is useful. The manifest gives the installed app its identity, and in some browsers lets the browser offer installation.
 
-The conference site needs favicons, a `robots.txt` and a sitemap, but a manifest adds little: people visit it a few times. Note that the manifest doesn't make the dashboard work offline; that needs a service worker (a background script that can intercept the site's requests) with a [caching](/architecture/caching/) strategy, which is a separate decision.
+The conference site needs favicons, a `robots.txt` and a sitemap, but a manifest adds little: people visit it a few times. Note that the manifest doesn't make the dashboard work offline; that needs a [service worker](/web-platform/offline-and-storage/#service-workers-a-proxy-in-the-browser) (a background script that can intercept the site's requests) with a [caching](/architecture/caching/) strategy, which is a separate decision.
 
 </details>

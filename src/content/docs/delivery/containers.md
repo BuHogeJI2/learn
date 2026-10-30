@@ -85,7 +85,7 @@ For local development, **Docker Compose** describes the app, its database and Re
 - **Secrets in layers** or in build arguments.
 - **The `latest` tag in production**: you can't tell what is running, and rollback is unclear.
 - **Running as root** on an old base image full of known vulnerabilities.
-- **Data written inside the container**, lost when the container is replaced, which every deploy does. A local volume survives that, but not the loss of its machine: by itself it has no replication or backups.
+- **Data written inside the container**, lost when the container is replaced, which every deploy does. A local volume survives that, but not the loss of its machine: by itself it has no replication or [backups](/delivery/disaster-recovery/#replication-is-not-a-backup).
 - **Ignoring `SIGTERM`**, so every deploy cuts off requests in flight.
 - **Memory limits that don't match the runtime.** When the process uses more memory than the limit, the kernel kills it (out of memory), and the container stops. The JavaScript heap is only part of a Node.js process's memory; buffers, native code and stacks come on top. Leave headroom between the heap setting and the limit, and measure the total.
 - **Wrong CPU architecture**: the container fails at once with `exec format error`.

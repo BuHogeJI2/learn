@@ -30,7 +30,7 @@ The fix starts with one question: **who owns this piece of state?** Once that is
 | **Shared client state** | The app in this tab | The session | Theme, a multi-step wizard, selected rows | Context or a store |
 | **URL state** | The URL | Shareable, part of history | Filters, sorting, page number, search query, active tab | The router's path and query parameters |
 | **Server state** | The server and its database | Persistent, shared between users | Products, profile, orders | A server-state cache, or rendering on the server |
-| **Persisted client state** | The device | Across visits | Preferences, unsent drafts | `localStorage`, IndexedDB |
+| **Persisted client state** | The device | Across visits | Preferences, unsent drafts | `localStorage`, IndexedDB ([browser storage](/web-platform/offline-and-storage/#storage-options)) |
 | **Form state** | The user, until submit | Until submit | Field values, validation errors | Native forms or a form library |
 
 The most important line is **server state**. In the browser, server data is **always a copy** of something you don't own:

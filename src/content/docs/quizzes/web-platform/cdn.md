@@ -39,7 +39,7 @@ Your site is behind a CDN with protection against DDoS (flooding a site with tra
 <details>
 <summary>Answer</summary>
 
-The origin is **publicly reachable**. Attackers found its address (old DNS records, certificate logs, a subdomain that isn't behind the CDN) and sent traffic straight to it. The CDN protects only the traffic that goes through it.
+The origin is **publicly reachable**. Attackers found its address (old [DNS](/web-platform/dns/) records, certificate logs, a subdomain that isn't behind the CDN) and sent traffic straight to it. The CDN protects only the traffic that goes through it.
 
 Make the origin accept traffic **only from the CDN**: allow only the CDN's IP ranges, require a secret header that the CDN adds, or use an authenticated connection (mutual TLS, or a tunnel offered by the CDN). After that, change the origin's IP if it has leaked.
 

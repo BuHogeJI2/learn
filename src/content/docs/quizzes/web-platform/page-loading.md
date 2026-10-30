@@ -58,7 +58,7 @@ Lighthouse on a developer laptop gives the page 98. But the field data in Search
 
 Both measure something real, but the field data decides what users feel. Lighthouse is a **lab** test: one simulated load, on one machine, with no real interactions, so it can't measure INP at all. Real users have mid-range phones, where the same JavaScript runs several times slower, and they click while scripts are still running.
 
-Poor INP points to step 7: JavaScript on the **main thread**. Look for long tasks in the Performance panel with CPU throttling on, and for heavy event handlers, third-party scripts and expensive [hydration](/architecture/rendering/#hydration-the-cost-of-html-that-looks-ready) (the framework running components again in the browser to attach handlers to server-rendered HTML). Use lab tools to debug, field data to decide.
+Poor INP points to step 7: JavaScript on the **[main thread](/web-platform/browser-execution/#mental-model-one-worker-one-queue-of-jobs)**. Look for long tasks in the Performance panel with CPU throttling on, and for heavy event handlers, third-party scripts and expensive [hydration](/architecture/rendering/#hydration-the-cost-of-html-that-looks-ready) (the framework running components again in the browser to attach handlers to server-rendered HTML). Use lab tools to debug, field data to decide.
 
 </details>
 
@@ -69,7 +69,7 @@ Marketing adds a chat widget as a classic `<script src="https://chat.vendor.exam
 <details>
 <summary>Answer</summary>
 
-A classic script **blocks the parser**: the browser stops building the page, connects to a new origin (DNS, TCP, TLS), downloads the script and runs it before it continues. Every user waits for a third-party server.
+A classic script **blocks the parser**: the browser stops building the page, connects to a new origin ([DNS](/web-platform/dns/), TCP, TLS), downloads the script and runs it before it continues. Every user waits for a third-party server.
 
 Options:
 

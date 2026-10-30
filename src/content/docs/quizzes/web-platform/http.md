@@ -73,7 +73,7 @@ A site moved to HTTP/2. A developer wants to keep serving images from `static1.e
 <details>
 <summary>Answer</summary>
 
-No. Domain sharding (spreading files over several domains) was a workaround for the HTTP/1.1 limit of about six connections per [origin](/security/browser-boundaries/#mental-model-origin-site-and-three-kinds-of-access) (scheme + host + port). HTTP/2 and HTTP/3 send many requests in parallel over **one connection**. Extra domains now cost extra DNS lookups (turning a name into an IP address) and extra TCP and TLS handshakes (the setup round trips before a connection can carry requests), and they split the connection and its compression state.
+No. Domain sharding (spreading files over several domains) was a workaround for the HTTP/1.1 limit of about six connections per [origin](/security/browser-boundaries/#mental-model-origin-site-and-three-kinds-of-access) (scheme + host + port). HTTP/2 and HTTP/3 send many requests in parallel over **one connection**. Extra domains now cost extra [DNS](/web-platform/dns/) lookups (turning a name into an IP address) and extra TCP and TLS handshakes (the setup round trips before a connection can carry requests), and they split the connection and its compression state.
 
 Serve files from as few origins as you can (often the same one, or one CDN domain). Make loading decisions about caching and about loading only what the page needs, not about connection limits.
 

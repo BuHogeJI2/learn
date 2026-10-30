@@ -145,7 +145,7 @@ Defenses:
 - **A nonce in cached HTML.** Every visitor gets the same nonce, and so does the attacker.
 - **State changes on `GET`**, which bypass `SameSite=Lax`.
 - **CORS that reflects any origin with credentials.** It removes the read barrier, so CSRF-style attacks can also read data ([CORS](/security/browser-boundaries/#cors-the-server-opts-in-to-being-read)).
-- **Moving tokens to `localStorage` "to avoid CSRF".** It trades CSRF for token theft through any XSS ([where to keep credentials](/security/auth/#where-the-browser-keeps-credentials)).
+- **Moving tokens to [`localStorage`](/web-platform/offline-and-storage/#storage-options) "to avoid CSRF".** It trades CSRF for token theft through any XSS ([where to keep credentials](/security/auth/#where-the-browser-keeps-credentials)).
 - **Trusting frontend validation.** It improves UX; the server must validate again.
 
 ## Where to put the effort

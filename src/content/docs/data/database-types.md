@@ -46,7 +46,7 @@ A second split is by workload:
 
 | Type | Data model | Strong at | Weak at | Examples |
 | --- | --- | --- | --- | --- |
-| **Relational** (SQL) | Tables with a fixed schema (the declared columns and their types); relations through keys; joins (combining rows of several tables in one query) | Flexible queries, constraints, transactions, questions you didn't plan for | Scaling writes across machines; schema changes need migrations | PostgreSQL, MySQL, SQLite, SQL Server |
+| **Relational** (SQL) | Tables with a fixed schema (the declared columns and their types); relations through keys; joins (combining rows of several tables in one query) | Flexible queries, constraints, transactions, questions you didn't plan for | Scaling writes across machines; schema changes need [migrations](/data/schema-evolution/) | PostgreSQL, MySQL, SQLite, SQL Server |
 | **Document** | JSON-like documents, nested; flexible shape | Reading and writing a whole object at once; data with varying shapes | Relations between documents; joins | MongoDB, Firestore, Couchbase |
 | **Key-value** | A value under a key | Very fast simple access: [caches](/architecture/caching/), sessions, counters, [rate limits](/architecture/reliability/#protecting-a-service-from-overload) (caps on how often a client may call) | Any query that isn't by key | Redis, Valkey, Memcached, Cloudflare KV, DynamoDB (also documents) |
 | **Wide-column** | Rows grouped by a partition key, spread over many machines | Huge write volume with access by known keys | Ad-hoc queries; you design tables per query | Cassandra, ScyllaDB, Bigtable, HBase |

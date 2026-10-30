@@ -16,7 +16,7 @@ officialDocs:
 
 ## What problem it solves
 
-Physics sets a hard limit. Light in optical fiber travels about 200,000 km per second, so a round trip (the time for a request to reach the server and come back) from Europe to the US west coast takes about 150 ms, before any server does any work. Loading a page needs several round trips (DNS, connection, TLS, the request itself), so distance multiplies.
+Physics sets a hard limit. Light in optical fiber travels about 200,000 km per second, so a round trip (the time for a request to reach the server and come back) from Europe to the US west coast takes about 150 ms, before any server does any work. Loading a page needs several round trips ([DNS](/web-platform/dns/), connection, TLS, the request itself), so distance multiplies.
 
 One **origin** (the server that holds your application and original data) is far from most of your users. It is also a single point of load and a single target for attacks.
 

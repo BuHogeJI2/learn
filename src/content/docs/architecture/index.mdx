@@ -4,13 +4,22 @@ description: "How systems are split, where work happens, and how parts talk to e
 sidebar:
   label: Overview
   order: 0
-planned:
-  - "Testing strategy: what each kind of test proves"
-  - "System design reading path: from requirements to operations"
 ---
 
 import DomainTopics from '../../../components/DomainTopics.astro';
 
 The "what" and "why" layer: choosing between options and knowing what each one costs.
+
+## A path through system design
+
+There is no single recipe for designing a system, but the questions come in a useful order. Take one user journey and go through these steps. You won't need every technique, and what you learn at the end often sends you back to the start.
+
+1. **State the constraints.** Who uses it, how much load, how fast it must be, what failure or data loss is acceptable, what the team and budget are. The ground rules come from [HTTP](/web-platform/http/), [how a browser loads a page](/web-platform/page-loading/) and [browser boundaries](/security/browser-boundaries/).
+2. **Decide who owns what.** Draw [application boundaries](/architecture/application-boundaries/) and [API contracts](/architecture/api-styles/), then decide where [client and server state](/architecture/state/) live, which [database type](/data/database-types/) fits, and which rules need [strong guarantees](/data/consistency/).
+3. **Decide where and when work happens.** Choose a [rendering strategy](/architecture/rendering/) and [caches](/architecture/caching/). Add [background jobs](/architecture/background-jobs/) or [real-time updates](/architecture/real-time/) only where the journey needs them, and check what stale or delayed results users will see.
+4. **Plan for growth and failure.** Find the bottleneck with [scaling](/architecture/scaling/), contain failures with [reliability patterns](/architecture/reliability/), and know how you would come back after a real loss with [disaster recovery](/delivery/disaster-recovery/).
+5. **Get evidence and ship safely.** Use a [testing strategy](/architecture/testing/) before release, [CI/CD](/delivery/ci-cd/) and a [deployment model](/delivery/deployment-models/) to change the system safely, and [monitoring](/observability/logs-metrics-traces/) to see what really happens in production. Then go back to step 1 with what you learned.
+
+## All topics
 
 <DomainTopics />

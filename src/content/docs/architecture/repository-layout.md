@@ -76,7 +76,7 @@ Internal packages come in two styles: consumed **from TypeScript source** direct
 
 - **Shared libraries** live in a private registry with semantic versioning (`major.minor.patch`, where a new major version means breaking changes), and automated pull requests (Renovate, Dependabot) keep consumers up to date.
 - **Templates and reusable CI workflows** stop configuration from drifting between repositories.
-- **Contract tests** (checks that a provider still matches what its consumers expect) and compatibility rules protect the APIs between projects ([API evolution](/architecture/api-styles/#evolution-the-long-term-cost)).
+- **[Contract tests](/architecture/testing/#test-types-and-what-they-prove)** (checks that a provider still matches what its consumers expect) and compatibility rules protect the APIs between projects ([API evolution](/architecture/api-styles/#evolution-the-long-term-cost)).
 - A side benefit: separate repositories force clear, versioned boundaries.
 
 ## Typical failures

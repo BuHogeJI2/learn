@@ -51,7 +51,7 @@ The credential can have two forms:
 - **Reference (session ID)**: a long random string. The server keeps the real data (user ID, expiry) in a **session store** and looks it up on each request. Revocation is easy: delete the record. The cost is one lookup per request, which is cheap with a fast store such as Redis.
 - **Self-contained token**, usually a **JWT** (JSON Web Token: JSON with the user ID, expiry and other **claims** (statements about the user), signed by the issuer). The server checks the signature and needs no lookup. But a token stays valid until it expires, so revocation is hard. The usual answer is a short lifetime plus a **refresh token** (a long-lived credential used only to get new short-lived tokens), or a revocation list, which brings the lookup back.
 
-How the credential travels is a **separate decision**: a cookie or an `Authorization` header. A JWT can live in a cookie; a session ID can be sent in a header. "Sessions or JWT" and "cookie or `localStorage`" are two different questions that are often mixed up.
+How the credential travels is a **separate decision**: a cookie or an `Authorization` header. A JWT can live in a cookie; a session ID can be sent in a header. "Sessions or JWT" and "cookie or [`localStorage`](/web-platform/offline-and-storage/#storage-options)" are two different questions that are often mixed up.
 
 | | In an `HttpOnly` cookie | In an `Authorization` header (your code holds it) |
 | --- | --- | --- |

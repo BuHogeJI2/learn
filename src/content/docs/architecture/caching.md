@@ -55,7 +55,7 @@ Every cache, from a browser to Redis (an in-memory key-value store), is describe
 | --- | --- | --- | --- |
 | 1. App memory | One tab | Your JS code / client library | API responses, normalized entities |
 | 2. Browser HTTP cache | One user | `Cache-Control`, `ETag` response headers | JS/CSS/images, some API responses |
-| 3. Service Worker (a script the browser runs between the page and the network) | One user | Your service worker code | Offline pages, app shell |
+| 3. Service Worker (a script the browser runs between the page and the network) | One user | Your [service worker](/web-platform/offline-and-storage/#service-workers-a-proxy-in-the-browser) code | Offline pages, app shell |
 | 4. CDN / edge (servers at the edge of the network, near users) | All users | Headers (`s-maxage`), CDN rules, purge API | Static files, public HTML and API responses |
 | 5. Application cache | All users (per instance or shared) | Your server code | Query results, rendered fragments, [sessions](/security/auth/#sessions-in-practice-the-lifecycle) |
 | 6. Database | All users | The DB itself, materialized views | Hot pages in memory, precomputed results |

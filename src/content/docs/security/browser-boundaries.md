@@ -113,7 +113,7 @@ Remember that `SameSite` works with **sites**: `blog.shop.example` is same-site 
 
 ## Other boundaries worth knowing
 
-- **Storage** (`localStorage`, IndexedDB) is per origin. Third-party iframes get **partitioned** storage: a separate copy for each top-level site.
+- **[Storage](/web-platform/offline-and-storage/#storage-options)** (`localStorage`, IndexedDB) is per origin. Third-party iframes get **partitioned** storage: a separate copy for each top-level site.
 - **Iframes and windows.** A cross-origin iframe can't touch the parent's DOM. They talk through `postMessage`; the receiver must check `event.origin`, and the sender should name the target origin instead of `'*'`.
 - **Who may frame you** is controlled by the `frame-ancestors` directive of CSP (see [clickjacking](/security/web-attacks/#clickjacking-and-other-ui-attacks)).
 - **Process isolation.** Browsers run different sites in different processes, so a bug like Spectre (reading memory through CPU timing) can't reach another site's data. Pages that need powerful features such as `SharedArrayBuffer` must opt in to **cross-origin isolation** with the `Cross-Origin-Opener-Policy` and `Cross-Origin-Embedder-Policy` headers.

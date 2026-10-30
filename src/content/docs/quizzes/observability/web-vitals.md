@@ -43,7 +43,7 @@ INP (how fast the page responds to clicks, taps and typing; good is 200 ms or le
 <details>
 <summary>Answer</summary>
 
-The work is a **long task** (work that blocks the main thread, the one that also handles input and painting, for more than 50 ms): until it ends, the browser can't paint the checked box or anything else.
+The work is a **[long task](/web-platform/browser-execution/#long-tasks-and-what-users-feel)** (work that blocks the main thread, the one that also handles input and painting, for more than 50 ms): until it ends, the browser can't paint the checked box or anything else.
 
 Options:
 

@@ -105,7 +105,7 @@ Mobile  ──► BFF (app) ─┼──► Users service
 
 - **Microservices too early.** A small team with an unclear domain draws the boundaries in the wrong places, and moving them is now expensive because they are network APIs.
 - **Splitting by technical layer** (a "frontend service", a "database service") instead of by business capability. Every feature then touches every service.
-- **Services reading each other's tables.** Hidden coupling: one team's schema change breaks another team's service. Sharing a database *server* is fine; sharing *tables* is the problem.
+- **Services reading each other's tables.** Hidden coupling: one team's [schema change](/data/schema-evolution/) breaks another team's service. Sharing a database *server* is fine; sharing *tables* is the problem.
 - **Chatty services.** One user request triggers twenty synchronous calls. Latency adds up, and availability multiplies down: if all twenty are required and fail independently, twenty services at 99.9% each give about 98% for the whole request.
 - **A monolith with no internal boundaries**, then "fixing" it by splitting into services along the same tangled lines.
 - **A shared "common" library** that every service depends on, so all services must be released together.

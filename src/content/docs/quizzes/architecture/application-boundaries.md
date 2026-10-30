@@ -13,7 +13,7 @@ A six-person startup is building its first product. The domain is still changing
 <details>
 <summary>Answer</summary>
 
-Start with a **modular monolith**: one deployable app, split into modules with explicit APIs and their own tables, with the rules checked by tooling. With an unclear domain, the first boundaries are usually wrong. Inside a monolith, moving a boundary is a refactoring; between services, it is a change to network APIs, data migrations and deployments.
+Start with a **modular monolith**: one deployable app, split into modules with explicit APIs and their own tables, with the rules checked by tooling. With an unclear domain, the first boundaries are usually wrong. Inside a monolith, moving a boundary is a refactoring; between services, it is a change to network APIs, [data migrations](/data/schema-evolution/) and deployments.
 
 Microservices pay off for many teams that need independent releases, and they cost a lot to run: network failures, no cross-service transactions, [distributed tracing](/observability/logs-metrics-traces/) to follow one request across services, API versioning. A six-person team gets the costs without the main benefit. Extract a service later for a concrete reason (different scaling, isolation for payments, a team that needs its own release schedule).
 

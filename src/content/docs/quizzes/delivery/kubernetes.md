@@ -57,7 +57,7 @@ A team runs PostgreSQL in a Deployment with one replica, storing data in the con
 
 A Pod's own filesystem is **lost when the Pod is replaced**. The controller created a new Pod on another node, as designed, but the data stayed with the old one.
 
-For data that must survive, use a **PersistentVolumeClaim** (a request for a disk that outlives the Pod), usually with a **StatefulSet** (an object that gives Pods stable names and their own disks), and check the reclaim policy (what happens to the disk when the claim is deleted) so deleting the claim doesn't delete the disk. Even then, a persistent volume is **not a backup**. Running a database well also means backups, upgrades and failover, so many teams keep stateless apps in Kubernetes and use a managed database outside the cluster.
+For data that must survive, use a **PersistentVolumeClaim** (a request for a disk that outlives the Pod), usually with a **StatefulSet** (an object that gives Pods stable names and their own disks), and check the reclaim policy (what happens to the disk when the claim is deleted) so deleting the claim doesn't delete the disk. Even then, a persistent volume is **not a [backup](/delivery/disaster-recovery/#replication-is-not-a-backup)**. Running a database well also means backups, upgrades and failover, so many teams keep stateless apps in Kubernetes and use a managed database outside the cluster.
 
 </details>
 
@@ -70,6 +70,6 @@ Service A calls service B over [gRPC](/architecture/api-styles/) (a remote proce
 
 A Kubernetes **Service balances connections, not requests**. HTTP/2 keeps one long-lived connection and sends many requests over it, so service A's existing connections stay on the old Pods. New Pods get traffic only when new connections are opened.
 
-Options: balance per request with a client-side load balancer in A (gRPC supports this), which needs the addresses of the individual Pods, for example from a headless Service (one that returns every Pod's address in DNS instead of one virtual address); or a [service mesh](/architecture/application-boundaries/#landscape) or proxy (Envoy, Istio, Linkerd) that spreads requests; or limit connection lifetime on B's side, so clients reconnect regularly and spread out. The same effect hits WebSockets and keep-alive connections after scaling up.
+Options: balance per request with a client-side load balancer in A (gRPC supports this), which needs the addresses of the individual Pods, for example from a headless Service (one that returns every Pod's address in [DNS](/web-platform/dns/) instead of one virtual address); or a [service mesh](/architecture/application-boundaries/#landscape) or proxy (Envoy, Istio, Linkerd) that spreads requests; or limit connection lifetime on B's side, so clients reconnect regularly and spread out. The same effect hits WebSockets and keep-alive connections after scaling up.
 
 </details>

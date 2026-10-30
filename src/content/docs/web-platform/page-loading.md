@@ -3,6 +3,8 @@ title: How a browser loads a page
 description: The journey from a typed URL to pixels on screen, and how to read it in the Network tab.
 related:
   - web-platform/http
+  - web-platform/dns
+  - web-platform/browser-execution
   - architecture/rendering
   - web-platform/cdn
 officialDocs:
@@ -41,9 +43,9 @@ Between pressing Enter and seeing a page, about a dozen steps happen, and any of
  7 └─ JavaScript runs, handlers attach                 page responds to input (INP)
 ```
 
-**1. Skip the network.** The fastest request is the one never sent. The browser checks its HTTP cache (see [Caching](/architecture/caching/)), a service worker may answer, the back/forward cache can restore a whole page instantly, and a page that was **prerendered** in advance (with the Speculation Rules API) shows up at once.
+**1. Skip the network.** The fastest request is the one never sent. The browser checks its HTTP cache (see [Caching](/architecture/caching/)), a [service worker](/web-platform/offline-and-storage/#service-workers-a-proxy-in-the-browser) (a script that can intercept the site's requests) may answer, the back/forward cache can restore a whole page instantly, and a page that was **prerendered** in advance (with the Speculation Rules API) shows up at once.
 
-**2. DNS.** The domain name is turned into an IP address. Answers are cached by the browser and the operating system, so this costs time mostly on a first visit: from a few milliseconds to over 100 ms.
+**2. [DNS](/web-platform/dns/).** The domain name is turned into an IP address. Answers are cached by the browser and the operating system, so this costs time mostly on a first visit: from a few milliseconds to over 100 ms.
 
 **3. Connection.** For HTTP/1.1 and HTTP/2 the browser opens a TCP connection (one round trip) and then does a TLS handshake (one more round trip with TLS 1.3). HTTP/3 runs over QUIC, which combines both into one round trip. Each **round trip** (RTT, the time for a packet to go to the server and back) is the unit that matters: on a mobile network it can be 100 ms or more, so three round trips before the first request is already a noticeable delay. This is the main reason a [CDN](/web-platform/cdn/) helps even for content that can't be cached: the handshakes happen with a nearby server. See [HTTP versions](/web-platform/http/#http-versions-same-meaning-different-transport).
 
@@ -57,7 +59,7 @@ Between pressing Enter and seeing a page, about a dozen steps happen, and any of
 
 **6. Rendering.** The browser calculates styles, does **layout** (the size and position of every box), **paints** pixels, and **composites** layers on the GPU. When the DOM or sizes change later, layout runs again; content that moves after it was shown is a **layout shift**.
 
-**7. Interactivity.** JavaScript runs on the **main thread**, the same thread that handles input and rendering. While a long script runs, clicks wait. For server-rendered pages, the HTML can be visible long before its JavaScript is ready; see [hydration](/architecture/rendering/#hydration-the-cost-of-html-that-looks-ready).
+**7. Interactivity.** JavaScript runs on the **[main thread](/web-platform/browser-execution/#mental-model-one-worker-one-queue-of-jobs)**, the same thread that handles input and rendering. While a long script runs, clicks wait. For server-rendered pages, the HTML can be visible long before its JavaScript is ready; see [hydration](/architecture/rendering/#hydration-the-cost-of-html-that-looks-ready).
 
 ### How the steps map to metrics
 

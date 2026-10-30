@@ -79,7 +79,7 @@ write ──► Primary ──(replication lag: usually ms to seconds, sometimes
 The two ends of the scale:
 
 - **Strong consistency** (linearizability): every read sees the latest committed write, as if there were one copy. Reading from the current primary avoids replica lag, but it is a full guarantee only if the read isn't served from an older snapshot and a failover never loses writes that were already confirmed.
-- **Eventual consistency**: if writes stop, all copies become the same, eventually. There is no promise about when. Caches, search indexes, CDNs and DNS are eventually consistent.
+- **Eventual consistency**: if writes stop, all copies become the same, eventually. There is no promise about when. Caches, search indexes, CDNs and [DNS](/web-platform/dns/#changing-dns-safely) are eventually consistent.
 
 Between them sit **session guarantees**: promises about what one user sees. They are separate, and a system can give one without the other:
 

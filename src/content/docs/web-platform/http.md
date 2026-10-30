@@ -135,13 +135,13 @@ Client                                   Server
 
 Things TLS does **not** do:
 
-- It doesn't hide **which site** you visit. The domain is visible in DNS (unless it is encrypted) and in the TLS handshake (until Encrypted Client Hello is widely used), and IP addresses are always visible.
+- It doesn't hide **which site** you visit. The domain is visible in [DNS](/web-platform/dns/#security-and-privacy) (unless it is encrypted) and in the TLS handshake (until Encrypted Client Hello is widely used), and IP addresses are always visible.
 - It doesn't say the site is **trustworthy**. A phishing site can have a perfectly valid certificate. It only proves that you are talking to whoever owns that domain.
 
 Related mechanisms:
 
 - **HSTS** (`Strict-Transport-Security` header) tells the browser to use only HTTPS for this domain from now on, so a first `http://` request can't be intercepted later. Domains can also be put on a preload list built into browsers.
-- **Secure contexts.** Many modern browser features (service workers, geolocation, clipboard, HTTP/2 and HTTP/3 in browsers) work only over HTTPS. So HTTPS is a requirement, not an option.
+- **Secure contexts.** Many modern browser features ([service workers](/web-platform/offline-and-storage/#service-workers-a-proxy-in-the-browser), geolocation, clipboard, HTTP/2 and HTTP/3 in browsers) work only over HTTPS. So HTTPS is a requirement, not an option.
 - **Free certificates.** Let's Encrypt and the ACME protocol made certificates free and automatically renewed. Most hosting platforms do it for you.
 
 ## HTTP versions: same meaning, different transport

@@ -53,7 +53,7 @@ This is why CSP is an architecture question: it is tied to your [rendering strat
 
 ## 4. Tokens in `localStorage` "to avoid CSRF"
 
-A team is worried about [CSRF](/security/web-attacks/#csrf-requests-the-user-didnt-mean) (another site making the browser send a request with the user's cookies). They propose to stop using a session cookie and keep a JWT (a signed token with the user's identity, see [auth](/security/auth/#mental-model-a-credential-checked-on-every-request)) in `localStorage`, sent in the `Authorization` header. What do they gain and what do they lose?
+A team is worried about [CSRF](/security/web-attacks/#csrf-requests-the-user-didnt-mean) (another site making the browser send a request with the user's cookies). They propose to stop using a session cookie and keep a JWT (a signed token with the user's identity, see [auth](/security/auth/#mental-model-a-credential-checked-on-every-request)) in [`localStorage`](/web-platform/offline-and-storage/#storage-options), sent in the `Authorization` header. What do they gain and what do they lose?
 
 <details>
 <summary>Answer</summary>

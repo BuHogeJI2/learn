@@ -8,7 +8,7 @@ Think about each scenario before you open the answer. There is rarely one correc
 
 ## 1. A 40-minute pipeline
 
-Every pull request runs a pipeline of 40 minutes: install, lint, type check, unit tests, build and the full end-to-end suite (tests that drive the whole app through a browser, like a user), all one after another. Developers have started merging without waiting for it. What would you change?
+Every pull request runs a pipeline of 40 minutes: install, lint, type check, [unit tests](/architecture/testing/#test-types-and-what-they-prove), build and the full end-to-end suite (tests that drive the whole app through a browser, like a user), all one after another. Developers have started merging without waiting for it. What would you change?
 
 <details>
 <summary>Answer</summary>

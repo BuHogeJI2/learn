@@ -52,7 +52,7 @@ Options: load such values at **runtime** (a small config endpoint, or a script t
 
 ## 4. A rollback that didn't help
 
-A release renamed a database column from `name` to `full_name` with a migration, and updated the code. An unrelated bug appeared, so the team rolled back to the previous version. The rollback made things worse: every page that reads users now fails. Why?
+A release renamed a database column from `name` to `full_name` with a [migration](/data/schema-evolution/#expand-migrate-contract), and updated the code. An unrelated bug appeared, so the team rolled back to the previous version. The rollback made things worse: every page that reads users now fails. Why?
 
 <details>
 <summary>Answer</summary>
