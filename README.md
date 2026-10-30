@@ -34,3 +34,8 @@ Content lives in `src/content/docs/`, with the Russian version under `src/conten
 
 - [`AGENTS.md`](./AGENTS.md) describes the structure, the page templates and the rules for links.
 - [`TRANSLATION.md`](./TRANSLATION.md) has the translation rules and the glossary.
+
+## License
+
+- The written content in `src/content/` is licensed under [CC BY 4.0](./LICENSE-CONTENT.md): reuse it freely with credit.
+- The code is licensed under the [MIT License](./LICENSE).
